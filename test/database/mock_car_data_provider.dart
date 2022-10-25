@@ -1,9 +1,8 @@
 import 'dart:async';
 
-import 'package:driveme/models/car.dart';
-import 'package:driveme/list/cars_list_bloc.dart';
+import 'package:widget_test_practice/models/car.dart';
+import 'package:widget_test_practice/list/cars_list_bloc.dart';
 
-// TODO 1: Read the Mock Test Data
 class MockCarDataProvider implements CarsDataProvider {
   @override
   Future<CarsList> loadCars() async {

@@ -13,6 +13,7 @@ class CarDetailsBloc {
   int? _currentId;
 
   void getItem(int id) async {
+    print('getItem');
     _itemController.sink.add(null);
 
     _currentId = id;
@@ -22,6 +23,7 @@ class CarDetailsBloc {
 
     _subscription = carsListBloc.outCars.listen(
       (listOfItems) async {
+        print(listOfItems);
         for (final item in listOfItems.items!) {
           if (item.id == _currentId) {
             _itemController.sink.add(item);

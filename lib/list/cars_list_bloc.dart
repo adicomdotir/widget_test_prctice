@@ -17,6 +17,7 @@ class CarsListBloc {
     if (items.items != null) {
       items.items?.sort(alphabetizeItemsByTitleIgnoreCases);
     }
+    print(items);
     _itemsController.sink.add(items);
   }
 

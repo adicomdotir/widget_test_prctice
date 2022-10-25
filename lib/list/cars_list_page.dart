@@ -150,6 +150,8 @@ class ListPageState extends State<ListPage> {
     await Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (BuildContext context) {
+          print('888888888888888888888888888888888888888');
+          print(car.id);
           return CarDetailsPage(id: car.id);
         },
       ),

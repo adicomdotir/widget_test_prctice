@@ -35,6 +35,7 @@ class CarDetailsPageState extends State<CarDetailsPage> {
           stream: carsDetailsBloc.outItem,
           initialData: null,
           builder: (BuildContext context, AsyncSnapshot<Car?> snapshot) {
+            print(snapshot.data);
             if (snapshot.data == null) {
               return const Center(child: CircularProgressIndicator());
             } else {
