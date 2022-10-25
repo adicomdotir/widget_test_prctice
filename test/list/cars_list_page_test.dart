@@ -1,10 +1,10 @@
-import 'package:widget_test_practice/dependency_injector.dart';
-import 'package:widget_test_practice/models/car.dart';
+import 'package:driveme/dependency_injector.dart';
+import 'package:driveme/models/car.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:widget_test_practice/list/cars_list_bloc.dart';
-import 'package:widget_test_practice/list/cars_list_page.dart';
-import 'package:widget_test_practice/constants.dart';
+import 'package:driveme/list/cars_list_bloc.dart';
+import 'package:driveme/list/cars_list_page.dart';
+import 'package:driveme/constants.dart';
 
 import '../database/mock_car_data_provider.dart';
 import '../database/mock_car_data_provider_error.dart';
@@ -17,108 +17,57 @@ void main() {
     '''Cars are displayed with summary details, and selected car is highlighted 
     in blue.''',
     (WidgetTester tester) async {
-      carsListBloc.injectDataProviderForTest(MockCarDataProvider());
+      // TODO 4: Inject and Load Mock Car Data
 
-      final cars = await MockCarDataProvider().loadCars();
-      cars.items?.sort(carsListBloc.alphabetizeItemsByTitleIgnoreCases);
+      // TODO 5: Load & Sort Mock Data for Verification
 
-      await tester.pumpWidget(const ListPageWrapper());
-      await tester.pump(Duration.zero);
+      // TODO 6: Load and render Widget
 
-      final carListKey = find.byKey(const Key(carsListKey));
-      expect(carListKey, findsOneWidget);
+      // TODO 7: Check Cars List's component's existence via key
 
-      _verifyAllCarDetails(cars.items!, tester);
+      // TODO 9: Call Verify Car Details function
 
-      carsListBloc.selectItem(1);
+      // TODO 10: Select a Car
 
-      // 1
-      bool widgetSelectedPredicate(Widget widget) =>
-          widget is Card && widget.color == Colors.blue.shade200;
-      // 2
-      bool widgetUnselectedPredicate(Widget widget) =>
-          widget is Card && widget.color == Colors.white;
-
-      expect(
-        find.byWidgetPredicate(widgetSelectedPredicate),
-        findsOneWidget,
-      );
-      expect(
-        find.byWidgetPredicate(widgetUnselectedPredicate),
-        findsNWidgets(5),
-      );
+      // TODO 11: Verify that Car is highlighted in blue
     },
   );
 
   testWidgets(
     'Proper error message is shown when an error occurred',
     (WidgetTester tester) async {
-      carsListBloc.injectDataProviderForTest(MockCarDataProviderError());
+      // TODO 12: Inject and Load Error Mock Car Data
 
-      await tester.pumpWidget(const ListPageWrapper());
-      await tester.pump(Duration.zero);
+      // TODO 13: Load and render Widget
 
-      final errorFinder = find.text(
-        errorMessage.replaceFirst(
-          errorMessage,
-          mockErrorMessage,
-        ),
-      );
-      expect(errorFinder, findsOneWidget);
+      // TODO 14: Verify that Error Message is shown
     },
   );
 
+  // TODO Replace testWidgets('''After encountering an error...'''
   testWidgets(
     '''After encountering an error, and stream is updated, Widget is also 
     updated.''',
     (WidgetTester tester) async {
-      carsListBloc.injectDataProviderForTest(MockCarDataProviderError());
+      // TODO 15: Inject and Load Error Mock Car Data
 
-      await tester.pumpWidget(const ListPageWrapper());
-      await tester.pump(Duration.zero);
+      // TODO 16: Load and render Widget
 
-      final errorFinder = find.text(
-        errorMessage.replaceFirst(
-          errorMessage,
-          mockErrorMessage,
-        ),
-      );
-      final retryButtonFinder = find.text(retryButton);
-      expect(errorFinder, findsOneWidget);
-      expect(retryButtonFinder, findsOneWidget);
+      // TODO 17: Verify that Error Message and Retry Button is shown
 
-      carsListBloc.injectDataProviderForTest(MockCarDataProvider());
-      await tester.tap(retryButtonFinder);
+      // TODO 18: Inject and Load Mock Car Data
 
-      await tester.pump(Duration.zero);
+      // TODO 19: Reload Widget
 
-      final cars = await MockCarDataProvider().loadCars();
-      _verifyAllCarDetails(cars.items!, tester);
+      // TODO 20: Load and Verify Car Data
     },
   );
 }
 
-void _verifyAllCarDetails(
-  List<Car> carsList,
-  WidgetTester tester,
-) async {
-  for (final car in carsList) {
-    final carTitleFinder = find.text(car.title);
-    final carPricePerDayFinder = find.text(
-      pricePerDayText.replaceFirst(
-        wildString,
-        car.pricePerDay.toStringAsFixed(2),
-      ),
-    );
-    await tester.ensureVisible(carTitleFinder);
-    expect(carTitleFinder, findsOneWidget);
-    await tester.ensureVisible(carPricePerDayFinder);
-    expect(carPricePerDayFinder, findsOneWidget);
-  }
-}
+// TODO 8: Create a function to verify list's existence
 
 class ListPageWrapper extends StatelessWidget {
-  const ListPageWrapper({Key? key}) : super(key: key);
+  const ListPageWrapper({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
