@@ -1,10 +1,10 @@
-import 'package:driveme/dependency_injector.dart';
-import 'package:driveme/models/car.dart';
+import 'package:widget_test_practice/dependency_injector.dart';
+import 'package:widget_test_practice/models/car.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:driveme/list/cars_list_bloc.dart';
-import 'package:driveme/list/cars_list_page.dart';
-import 'package:driveme/constants.dart';
+import 'package:widget_test_practice/list/cars_list_bloc.dart';
+import 'package:widget_test_practice/list/cars_list_page.dart';
+import 'package:widget_test_practice/constants.dart';
 
 import '../database/mock_car_data_provider.dart';
 import '../database/mock_car_data_provider_error.dart';
@@ -18,12 +18,19 @@ void main() {
     in blue.''',
     (WidgetTester tester) async {
       // TODO 4: Inject and Load Mock Car Data
+      carsListBloc.injectDataProviderForTest(MockCarDataProvider());
 
       // TODO 5: Load & Sort Mock Data for Verification
+      final cars = await MockCarDataProvider().loadCars();
+      cars.items?.sort(carsListBloc.alphabetizeItemsByTitleIgnoreCases);
 
       // TODO 6: Load and render Widget
+      await tester.pumpWidget(const ListPageWrapper());
+      await tester.pumpAndSettle(Duration.zero);
 
       // TODO 7: Check Cars List's component's existence via key
+      final carListKey = find.byKey(const Key(carsListKey));
+      expect(carListKey, findsOneWidget);
 
       // TODO 9: Call Verify Car Details function
 
@@ -67,7 +74,7 @@ void main() {
 // TODO 8: Create a function to verify list's existence
 
 class ListPageWrapper extends StatelessWidget {
-  const ListPageWrapper({Key key}) : super(key: key);
+  const ListPageWrapper({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

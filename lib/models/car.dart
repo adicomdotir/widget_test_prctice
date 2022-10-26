@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:widget_test_practice/constants.dart';
+
 class Car {
   final int id;
   final String title;
@@ -17,8 +19,22 @@ class Car {
     required this.selected,
     required this.features,
   });
+
+  factory Car.fromJson(Map<String, dynamic> json) {
+    return Car(
+      id: json[carsIdKey],
+      title: json[carsTitleKey],
+      description: json[carsDescriptionKey],
+      url: json[carsUrlKey],
+      pricePerDay: json[carsPricePerDayKey],
+      selected: false,
+      features: json[carsFeaturesKey],
+    );
+  }
 }
 
 class CarsList {
-  CarsList(List<Car>? lists, String? message);
+  final List<Car>? items;
+
+  CarsList(this.items, String? message);
 }
