@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.blue,
         fontFamily: 'Lato',
       ),
       home: const HomePage(),
@@ -46,7 +46,7 @@ class RatingBar extends StatelessWidget {
     Key? key,
     required this.rating,
     required this.ratingCount,
-    this.size = 18,
+    this.size = 24,
   }) : super(key: key);
 
   @override
