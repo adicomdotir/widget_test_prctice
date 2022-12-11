@@ -26,11 +26,17 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
+    return const AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         body: Center(
-          child: Stopwatch(),
+          child: Padding(
+            padding: EdgeInsets.all(32.0),
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: Stopwatch(),
+            ),
+          ),
         ),
       ),
     );

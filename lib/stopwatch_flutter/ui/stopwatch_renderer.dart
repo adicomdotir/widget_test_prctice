@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:widget_test_practice/stopwatch_flutter/ui/clock_markers.dart';
+import 'package:widget_test_practice/stopwatch_flutter/ui/elapsed_time_text.dart';
 
 class StopwatchRenderer extends StatelessWidget {
   const StopwatchRenderer({
     Key? key,
-    required this.radius,
+    required this.elapsed,
   }) : super(key: key);
-  final double radius;
+  final Duration elapsed;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        for (var i = 0; i < 60; i++)
-          Positioned(
-            left: radius,
-            top: radius,
-            child: ClockSecondsTickMarker(seconds: i, radius: radius),
-          ),
-        for (var i = 5; i <= 60; i += 5)
-          Positioned(
-            top: radius,
-            left: radius,
-            child: ClockTextMarker(value: i, maxValue: 60, radius: radius),
-          ),
+        Container(
+          color: Colors.indigo,
+        ),
+        ElapsedTimeText(
+          elapsed: elapsed,
+        ),
       ],
     );
   }
