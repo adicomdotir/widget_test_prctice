@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:widget_test_practice/dbestech/custom_appbar_reusable_widget/custom_app_bar.dart';
-import 'package:widget_test_practice/dbestech/custom_appbar_reusable_widget/second_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -96,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                     Icons.delete,
                     color: Colors.redAccent.withOpacity(0.9),
                   ),
-                  onPressed: () =>  _removeItem(index),
+                  onPressed: () => _removeItem(index),
                 ),
               ),
             ),

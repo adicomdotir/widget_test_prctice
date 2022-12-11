@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -45,7 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         const CircleAvatar(
                           radius: 32,
                           backgroundImage: NetworkImage(
-                              'https://learnenglish.britishcouncil.org/sites/podcasts/files/styles/max_1300x1300/public/2021-10/RS6715_492969113-hig.jpg?itok=W4AjyK_X'),
+                            'https://learnenglish.britishcouncil.org/sites/podcasts/files/styles/max_1300x1300/public/2021-10/RS6715_492969113-hig.jpg?itok=W4AjyK_X',
+                          ),
                         ),
                         const SizedBox(
                           width: 16,

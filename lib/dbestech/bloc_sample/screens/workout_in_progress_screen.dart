@@ -16,7 +16,7 @@ class WorkoutInProgressScreen extends StatelessWidget {
 
     int exerciseRemaining = exercise.prelude! - exerciseElapsed;
     bool isPrelude = exerciseElapsed < exercise.prelude!;
-    int exerciseTotal = isPrelude ? exercise.prelude! : exercise.duration!;
+    // int exerciseTotal = isPrelude ? exercise.prelude! : exercise.duration!;
 
     if (!isPrelude) {
       exerciseElapsed -= exercise.prelude!;

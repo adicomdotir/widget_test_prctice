@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:widget_test_practice/ui_tutorials/travel_booking_app_travelkuy_ui_design/constants/color_constant.dart';
 
 class BottomNavigationTravelkuy extends StatefulWidget {
+  const BottomNavigationTravelkuy({Key? key}) : super(key: key);
+
   @override
   _BottomNavigationTravelkuyState createState() =>
       _BottomNavigationTravelkuyState();

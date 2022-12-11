@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -73,8 +71,9 @@ class _HomePageState extends State<HomePage> {
     await _shoppingBox.delete(itemKey);
     _refreshItems();
 
-    ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text('An item has been deleted')));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('An item has been deleted')),
+    );
   }
 
   void _showForm(BuildContext ctx, int? itemKey) async {

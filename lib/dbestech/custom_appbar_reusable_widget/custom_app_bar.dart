@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:widget_test_practice/dbestech/custom_appbar_reusable_widget/second_page.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -8,14 +7,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showActionIcon;
   final VoidCallback? onMenuActionTap;
 
-  const CustomAppBar(
-      {Key? key,
-      this.title = '',
-      this.leading,
-      this.titleWidget,
-      this.showActionIcon = false,
-      this.onMenuActionTap})
-      : super(key: key);
+  const CustomAppBar({
+    Key? key,
+    this.title = '',
+    this.leading,
+    this.titleWidget,
+    this.showActionIcon = false,
+    this.onMenuActionTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

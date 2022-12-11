@@ -9,8 +9,6 @@ import 'package:widget_test_practice/dbestech/bloc_sample/screens/home_page.dart
 import 'package:widget_test_practice/dbestech/bloc_sample/screens/workout_in_progress_screen.dart';
 import 'package:widget_test_practice/dbestech/bloc_sample/states/workout_state.dart';
 
-import 'models/workout.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final storage = await HydratedStorage.build(
@@ -42,10 +40,10 @@ class WorkoutTime extends StatelessWidget {
             create: (context) {
               WorkoutsCubit workoutsCubit = WorkoutsCubit();
               if (workoutsCubit.state.isEmpty) {
-                print('... loading json since the state is empty');
+                debugPrint('... loading json since the state is empty');
                 workoutsCubit.getWorkouts();
               } else {
-                print('... the state is not empty ...');
+                debugPrint('... the state is not empty ...');
               }
               return workoutsCubit;
             },
@@ -61,7 +59,7 @@ class WorkoutTime extends StatelessWidget {
             } else if (state is WorkoutEditing) {
               return const EditWorkoutScreen();
             }
-            return WorkoutInProgressScreen();
+            return const WorkoutInProgressScreen();
           },
         ),
       ),

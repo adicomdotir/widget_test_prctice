@@ -22,7 +22,7 @@ class WorkoutsCubit extends HydratedCubit<List<Workout>> {
   }
 
   saveWorkout(Workout workout, int index) {
-    Workout newWorkout = Workout(exercises: [], title: workout.title);
+    Workout newWorkout = Workout(exercises: const [], title: workout.title);
     int exIndex = 0;
     int startTime = 0;
     for (var ex in workout.exercises) {
