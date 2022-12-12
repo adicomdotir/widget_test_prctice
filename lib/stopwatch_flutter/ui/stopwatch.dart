@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:widget_test_practice/stopwatch_flutter/ui/stopwatch_renderer.dart';
 
 import 'elapsed_time_text.dart';
 
@@ -20,7 +21,7 @@ class _StopwatchState extends State<Stopwatch>
   @override
   void initState() {
     super.initState();
-    _ticker = this.createTicker((elapsed) {
+    _ticker = createTicker((elapsed) {
       setState(() {
         _elapsed = elapsed;
       });
@@ -36,8 +37,14 @@ class _StopwatchState extends State<Stopwatch>
 
   @override
   Widget build(BuildContext context) {
-    return ElapsedTimeText(
-      elapsed: _elapsed,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final radius = constraints.maxWidth / 2;
+        return StopwatchRenderer(
+          elapsed: _elapsed,
+          radius: radius,
+        );
+      }
     );
   }
 }
