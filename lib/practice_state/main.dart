@@ -9,13 +9,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('$runtimeType build');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: CounterInherited(
-        child: InheritedColor(
-          child: const HomeWidget(),
-          color: Colors.red,
-        ),
+        child: const HomeWidget(),
       ),
     );
   }
@@ -26,60 +24,75 @@ class HomeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var counterInherited = CounterWidget.of(context);
+    print('$runtimeType build');
+    var item =
+        InheritedModel.inheritFrom<CounterWidget>(context, aspect: 1)!.state;
     return Scaffold(
       appBar: AppBar(
-        title: Text(counterInherited.counter.toString()),
+        title: TitleWidget(),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          counterInherited.increment();
-        },
-        child: Icon(Icons.add),
-      ),
+      floatingActionButton: FabWidget(),
       body: Column(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          NewWidget(),
-          NewWidget(),
-          NewWidget(),
-          Text('${counterInherited.counter}'),
+          Center(
+            child: TextWidget(),
+          ),
         ],
       ),
     );
   }
 }
 
-class NewWidget extends StatelessWidget {
-  const NewWidget({
+class FabWidget extends StatelessWidget {
+  const FabWidget({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var color = InheritedColor.of(context);
-    return Text(
-      'This is sample.',
-      style: TextStyle(color: color.color),
+    print('FabWidget build');
+    var item =
+        InheritedModel.inheritFrom<CounterWidget>(context, aspect: 2)!.state;
+    return FloatingActionButton(
+      onPressed: () {
+        item.increment();
+      },
+      child: Icon(Icons.add),
     );
   }
 }
 
-class InheritedColor extends InheritedWidget {
-  final Color color;
-
-  InheritedColor({required Widget child, required this.color})
-      : super(child: child);
+class TitleWidget extends StatelessWidget {
+  const TitleWidget({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  bool updateShouldNotify(covariant InheritedColor oldWidget) {
-    return color == oldWidget.color;
+  Widget build(BuildContext context) {
+    print('$runtimeType build');
+    var item =
+        InheritedModel.inheritFrom<CounterWidget>(context, aspect: 1)!.state;
+    return Text(item.counter.toString());
   }
+}
 
-  static InheritedColor of(BuildContext context) {
-    var color = context.dependOnInheritedWidgetOfExactType<InheritedColor>();
-    assert(color != null);
-    return color!;
+class TextWidget extends StatelessWidget {
+  const TextWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    print('$runtimeType build');
+    var item =
+        InheritedModel.inheritFrom<CounterWidget>(context, aspect: 1)!.state;
+    return Text(
+      'This is sample. ${item.counter}',
+      style: Theme.of(context).textTheme.headline4,
+    );
   }
 }
 
@@ -109,21 +122,22 @@ class CounterInheritedState extends State<CounterInherited> {
   }
 }
 
-class CounterWidget extends InheritedWidget {
+class CounterWidget extends InheritedModel<int> {
   CounterWidget({Key? key, required this.child, required this.state})
       : super(key: key, child: child);
 
   final Widget child;
   final CounterInheritedState state;
 
-  static CounterInheritedState of(BuildContext context) {
-    var result = context.dependOnInheritedWidgetOfExactType<CounterWidget>();
-    assert(result != null);
-    return result!.state;
-  }
-
   @override
   bool updateShouldNotify(CounterWidget oldWidget) {
     return true;
+  }
+
+  @override
+  bool updateShouldNotifyDependent(
+      covariant InheritedModel<int> oldWidget, Set<int> dependencies) {
+    if (dependencies.contains(1)) return true;
+    return false;
   }
 }
