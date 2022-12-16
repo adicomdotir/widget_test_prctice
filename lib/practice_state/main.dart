@@ -11,9 +11,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: InheritedColor(
-        child: const HomeWidget(),
-        color: Colors.red,
+      home: CounterInherited(
+        child: InheritedColor(
+          child: const HomeWidget(),
+          color: Colors.red,
+        ),
       ),
     );
   }
@@ -24,14 +26,24 @@ class HomeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var counterInherited = CounterWidget.of(context);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(counterInherited.counter.toString()),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          counterInherited.increment();
+        },
+        child: Icon(Icons.add),
+      ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
           NewWidget(),
           NewWidget(),
           NewWidget(),
+          Text('${counterInherited.counter}'),
         ],
       ),
     );
@@ -68,5 +80,50 @@ class InheritedColor extends InheritedWidget {
     var color = context.dependOnInheritedWidgetOfExactType<InheritedColor>();
     assert(color != null);
     return color!;
+  }
+}
+
+class CounterInherited extends StatefulWidget {
+  final Widget child;
+  CounterInherited({Key? key, required this.child}) : super(key: key);
+
+  @override
+  State<CounterInherited> createState() => CounterInheritedState();
+}
+
+class CounterInheritedState extends State<CounterInherited> {
+  int counter = 0;
+
+  void increment() {
+    setState(() {
+      counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CounterWidget(
+      child: widget.child,
+      state: this,
+    );
+  }
+}
+
+class CounterWidget extends InheritedWidget {
+  CounterWidget({Key? key, required this.child, required this.state})
+      : super(key: key, child: child);
+
+  final Widget child;
+  final CounterInheritedState state;
+
+  static CounterInheritedState of(BuildContext context) {
+    var result = context.dependOnInheritedWidgetOfExactType<CounterWidget>();
+    assert(result != null);
+    return result!.state;
+  }
+
+  @override
+  bool updateShouldNotify(CounterWidget oldWidget) {
+    return true;
   }
 }
