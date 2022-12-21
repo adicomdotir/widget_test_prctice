@@ -25,8 +25,6 @@ class HomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('$runtimeType build');
-    var item =
-        InheritedModel.inheritFrom<CounterWidget>(context, aspect: 1)!.state;
     return Scaffold(
       appBar: AppBar(
         title: TitleWidget(),
@@ -54,8 +52,9 @@ class FabWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('FabWidget build');
-    var item =
-        InheritedModel.inheritFrom<CounterWidget>(context, aspect: 2)!.state;
+    var item = context
+        .dependOnInheritedWidgetOfExactType<CounterWidget>(aspect: 2)!
+        .state;
     return FloatingActionButton(
       onPressed: () {
         item.increment();
@@ -74,7 +73,7 @@ class TitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     print('$runtimeType build');
     var item =
-        InheritedModel.inheritFrom<CounterWidget>(context, aspect: 1)!.state;
+        context.dependOnInheritedWidgetOfExactType<CounterWidget>()!.state;
     return Text(item.counter.toString());
   }
 }
@@ -88,7 +87,7 @@ class TextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     print('$runtimeType build');
     var item =
-        InheritedModel.inheritFrom<CounterWidget>(context, aspect: 1)!.state;
+        context.dependOnInheritedWidgetOfExactType<CounterWidget>()!.state;
     return Text(
       'This is sample. ${item.counter}',
       style: Theme.of(context).textTheme.headline4,
@@ -122,7 +121,7 @@ class CounterInheritedState extends State<CounterInherited> {
   }
 }
 
-class CounterWidget extends InheritedModel<int> {
+class CounterWidget extends InheritedWidget {
   CounterWidget({Key? key, required this.child, required this.state})
       : super(key: key, child: child);
 
@@ -134,10 +133,10 @@ class CounterWidget extends InheritedModel<int> {
     return true;
   }
 
-  @override
-  bool updateShouldNotifyDependent(
-      covariant InheritedModel<int> oldWidget, Set<int> dependencies) {
-    if (dependencies.contains(1)) return true;
-    return false;
-  }
+  // @override
+  // bool updateShouldNotifyDependent(
+  //     covariant InheritedModel<int> oldWidget, Set<int> dependencies) {
+  //   if (dependencies.contains(1)) return true;
+  //   return false;
+  // }
 }
