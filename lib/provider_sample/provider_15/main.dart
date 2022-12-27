@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:widget_test_practice/provider_sample/provider_14/counter.dart';
-import 'package:widget_test_practice/provider_sample/provider_14/show_me_counter.dart';
+import 'package:widget_test_practice/provider_sample/provider_15/pages/proxy_provider_proxy_provider.dart';
 import 'package:widget_test_practice/provider_sample/provider_15/pages/proxy_provider_update.dart';
 
+import 'pages/proxy_provider_create_update.dart';
 import 'pages/why_proxy_provider.dart';
 
 void main() {
@@ -84,11 +83,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const ProxyProviderUpdate(),
+                    builder: (_) => const ProxyProviderCreateUpdate(),
                   ),
                 ),
                 child: const Text(
                   'ProxyProvider\ncreate/update',
+                  style: TextStyle(fontSize: 20.0),
+                  textAlign: TextAlign.center,
+                ),
+              ),const SizedBox(
+                height: 20.0,
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const ProxyProviderProxyProvider(),
+                  ),
+                ),
+                child: const Text(
+                  'ProxyProvider\nProxyProvider',
                   style: TextStyle(fontSize: 20.0),
                   textAlign: TextAlign.center,
                 ),
