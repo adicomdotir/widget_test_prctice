@@ -1,14 +1,14 @@
 
 import 'package:widget_test_practice/clean_architecture/sample_01/shared/data/models/user_model.dart';
 
-final mockUser = UserModel(
+const mockUser = UserModel(
   id: 1,
   name: 'Leanne Graham',
   username: 'Bret',
   email: 'Sincere@april.biz',
 );
 
-final mockUsers = [
+const mockUsers = [
   UserModel(
     id: 1,
     name: 'Leanne Graham',

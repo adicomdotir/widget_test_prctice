@@ -1,17 +1,12 @@
-import 'package:equatable/equatable.dart';
+import 'package:widget_test_practice/clean_architecture/sample_01/features/users/domain/user.dart';
 
-class UserModel extends Equatable {
-  final int id;
-  final String name;
-  final String username;
-  final String email;
-
-  UserModel({
-    required this.id,
-    required this.name,
-    required this.username,
-    required this.email,
-  });
+class UserModel extends User {
+  const UserModel({
+    required int id,
+    required String name,
+    required String username,
+    required String email,
+  }) : super(id: id, name: name, username: username, email: email);
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
@@ -21,15 +16,6 @@ class UserModel extends Equatable {
       email: json['email'],
     );
   }
-
-  @override
-  // TODO: implement props
-  List<Object?> get props => [
-        id,
-        name,
-        username,
-        email,
-      ];
 
   Map<String, dynamic> toJson() {
     return {

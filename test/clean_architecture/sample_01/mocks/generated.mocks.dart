@@ -5,9 +5,13 @@
 import 'dart:async' as _i3;
 import 'dart:typed_data' as _i5;
 
-import 'package:dio/src/adapter.dart' as _i2;
+import 'package:dio/dio.dart' as _i2;
 import 'package:dio/src/options.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:widget_test_practice/clean_architecture/sample_01/features/users/data/data_sources/remote/user_remote_data_source.dart'
+    as _i6;
+import 'package:widget_test_practice/clean_architecture/sample_01/shared/data/models/user_model.dart'
+    as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -43,4 +47,20 @@ class MockHttpClientAdapter extends _i1.Mock implements _i2.HttpClientAdapter {
   void close({bool? force = false}) =>
       super.noSuchMethod(Invocation.method(#close, [], {#force: force}),
           returnValueForMissingStub: null);
+}
+
+/// A class which mocks [UserRemoteDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserRemoteDataSource extends _i1.Mock
+    implements _i6.UserRemoteDataSource {
+  MockUserRemoteDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i3.Future<List<_i7.UserModel>> fetchUsers() =>
+      (super.noSuchMethod(Invocation.method(#fetchUsers, []),
+              returnValue: Future<List<_i7.UserModel>>.value(<_i7.UserModel>[]))
+          as _i3.Future<List<_i7.UserModel>>);
 }
