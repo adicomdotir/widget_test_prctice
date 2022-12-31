@@ -11,7 +11,7 @@ class FetchUsers extends UseCase<String, List<User>, NoParams> {
   FetchUsers(this.repository);
 
   @override
-  Future<Either<Failure<String>, List<User>>> call(NoParams params) async {
-    return await repository.getUsers();
+  Future<Either<Failure<String>, List<User>>> call(NoParams params) {
+    return repository.getUsers();
   }
 }
