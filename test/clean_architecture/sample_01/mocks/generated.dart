@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:mockito/annotations.dart';
 import 'package:widget_test_practice/clean_architecture/sample_01/features/posts/data/data_sources/remote/post_remote_data_source.dart';
+import 'package:widget_test_practice/clean_architecture/sample_01/features/posts/domain/repositories/post_repository.dart';
+import 'package:widget_test_practice/clean_architecture/sample_01/features/posts/domain/use_cases/fetch_posts.dart';
 import 'package:widget_test_practice/clean_architecture/sample_01/features/users/data/data_sources/remote/user_remote_data_source.dart';
 import 'package:widget_test_practice/clean_architecture/sample_01/features/users/domain/repositories/user_repository.dart';
 import 'package:widget_test_practice/clean_architecture/sample_01/features/users/domain/use_cases/fetch_users.dart';
@@ -11,7 +13,7 @@ import 'package:widget_test_practice/clean_architecture/sample_01/features/users
   UserRepository,
   FetchUsers,
   PostRemoteDataSource,
-  // PostRepository,
-  // FetchPosts,
+  PostRepository,
+  FetchPosts,
 ])
 void generate() {}

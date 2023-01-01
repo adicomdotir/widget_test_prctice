@@ -1,8 +1,8 @@
-import 'package:flutter_clean_tutorial/core/either.dart';
-import 'package:flutter_clean_tutorial/core/error/failure.dart';
-import 'package:flutter_clean_tutorial/features/posts/domain/use_cases/fetch_posts.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:widget_test_practice/clean_architecture/sample_01/core/either.dart';
+import 'package:widget_test_practice/clean_architecture/sample_01/core/error/failure.dart';
+import 'package:widget_test_practice/clean_architecture/sample_01/features/posts/domain/use_cases/fetch_posts.dart';
 
 import '../../../../mocks/generated.mocks.dart';
 import '../../../../mocks/mock_data.dart';

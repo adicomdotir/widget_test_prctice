@@ -2,32 +2,38 @@
 // in widget_test_practice/test/clean_architecture/sample_01/mocks/generated.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i5;
-import 'dart:typed_data' as _i7;
+import 'dart:async' as _i6;
+import 'dart:typed_data' as _i8;
 
 import 'package:dio/dio.dart' as _i2;
-import 'package:dio/src/options.dart' as _i6;
+import 'package:dio/src/options.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:widget_test_practice/clean_architecture/sample_01/core/either.dart'
     as _i3;
 import 'package:widget_test_practice/clean_architecture/sample_01/core/error/failure.dart'
-    as _i10;
+    as _i11;
 import 'package:widget_test_practice/clean_architecture/sample_01/core/use_cases/use_case.dart'
-    as _i13;
-import 'package:widget_test_practice/clean_architecture/sample_01/features/posts/data/data_sources/remote/post_remote_data_source.dart'
     as _i14;
-import 'package:widget_test_practice/clean_architecture/sample_01/features/posts/data/models/post_model.dart'
+import 'package:widget_test_practice/clean_architecture/sample_01/features/posts/data/data_sources/remote/post_remote_data_source.dart'
     as _i15;
+import 'package:widget_test_practice/clean_architecture/sample_01/features/posts/data/models/post_model.dart'
+    as _i16;
+import 'package:widget_test_practice/clean_architecture/sample_01/features/posts/domain/entities/post.dart'
+    as _i18;
+import 'package:widget_test_practice/clean_architecture/sample_01/features/posts/domain/repositories/post_repository.dart'
+    as _i5;
+import 'package:widget_test_practice/clean_architecture/sample_01/features/posts/domain/use_cases/fetch_posts.dart'
+    as _i17;
 import 'package:widget_test_practice/clean_architecture/sample_01/features/users/data/data_sources/remote/user_remote_data_source.dart'
-    as _i8;
+    as _i9;
 import 'package:widget_test_practice/clean_architecture/sample_01/features/users/domain/repositories/user_repository.dart'
     as _i4;
 import 'package:widget_test_practice/clean_architecture/sample_01/features/users/domain/use_cases/fetch_users.dart'
-    as _i11;
-import 'package:widget_test_practice/clean_architecture/sample_01/features/users/domain/user.dart'
     as _i12;
+import 'package:widget_test_practice/clean_architecture/sample_01/features/users/domain/user.dart'
+    as _i13;
 import 'package:widget_test_practice/clean_architecture/sample_01/shared/data/models/user_model.dart'
-    as _i9;
+    as _i10;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -45,6 +51,8 @@ class _FakeEither_1<E, S> extends _i1.Fake implements _i3.Either<E, S> {}
 
 class _FakeUserRepository_2 extends _i1.Fake implements _i4.UserRepository {}
 
+class _FakePostRepository_3 extends _i1.Fake implements _i5.PostRepository {}
+
 /// A class which mocks [HttpClientAdapter].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -54,15 +62,15 @@ class MockHttpClientAdapter extends _i1.Mock implements _i2.HttpClientAdapter {
   }
 
   @override
-  _i5.Future<_i2.ResponseBody> fetch(
-          _i6.RequestOptions? options,
-          _i5.Stream<_i7.Uint8List>? requestStream,
-          _i5.Future<dynamic>? cancelFuture) =>
+  _i6.Future<_i2.ResponseBody> fetch(
+          _i7.RequestOptions? options,
+          _i6.Stream<_i8.Uint8List>? requestStream,
+          _i6.Future<dynamic>? cancelFuture) =>
       (super.noSuchMethod(
               Invocation.method(#fetch, [options, requestStream, cancelFuture]),
               returnValue:
                   Future<_i2.ResponseBody>.value(_FakeResponseBody_0()))
-          as _i5.Future<_i2.ResponseBody>);
+          as _i6.Future<_i2.ResponseBody>);
   @override
   void close({bool? force = false}) =>
       super.noSuchMethod(Invocation.method(#close, [], {#force: force}),
@@ -73,16 +81,16 @@ class MockHttpClientAdapter extends _i1.Mock implements _i2.HttpClientAdapter {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserRemoteDataSource extends _i1.Mock
-    implements _i8.UserRemoteDataSource {
+    implements _i9.UserRemoteDataSource {
   MockUserRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<List<_i9.UserModel>> fetchUsers() =>
-      (super.noSuchMethod(Invocation.method(#fetchUsers, []),
-              returnValue: Future<List<_i9.UserModel>>.value(<_i9.UserModel>[]))
-          as _i5.Future<List<_i9.UserModel>>);
+  _i6.Future<List<_i10.UserModel>> fetchUsers() => (super.noSuchMethod(
+          Invocation.method(#fetchUsers, []),
+          returnValue: Future<List<_i10.UserModel>>.value(<_i10.UserModel>[]))
+      as _i6.Future<List<_i10.UserModel>>);
 }
 
 /// A class which mocks [UserRepository].
@@ -94,19 +102,19 @@ class MockUserRepository extends _i1.Mock implements _i4.UserRepository {
   }
 
   @override
-  _i5.Future<_i3.Either<_i10.Failure<String>, List<_i9.UserModel>>>
+  _i6.Future<_i3.Either<_i11.Failure<String>, List<_i10.UserModel>>>
       getUsers() => (super.noSuchMethod(Invocation.method(#getUsers, []),
               returnValue: Future<
-                      _i3.Either<_i10.Failure<String>,
-                          List<_i9.UserModel>>>.value(
-                  _FakeEither_1<_i10.Failure<String>, List<_i9.UserModel>>()))
-          as _i5.Future<_i3.Either<_i10.Failure<String>, List<_i9.UserModel>>>);
+                      _i3.Either<_i11.Failure<String>,
+                          List<_i10.UserModel>>>.value(
+                  _FakeEither_1<_i11.Failure<String>, List<_i10.UserModel>>()))
+          as _i6.Future<_i3.Either<_i11.Failure<String>, List<_i10.UserModel>>>);
 }
 
 /// A class which mocks [FetchUsers].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFetchUsers extends _i1.Mock implements _i11.FetchUsers {
+class MockFetchUsers extends _i1.Mock implements _i12.FetchUsers {
   MockFetchUsers() {
     _i1.throwOnMissingStub(this);
   }
@@ -116,28 +124,68 @@ class MockFetchUsers extends _i1.Mock implements _i11.FetchUsers {
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeUserRepository_2()) as _i4.UserRepository);
   @override
-  _i5.Future<_i3.Either<_i10.Failure<String>, List<_i12.User>>> call(
-          _i13.NoParams? params) =>
+  _i6.Future<_i3.Either<_i11.Failure<String>, List<_i13.User>>> call(
+          _i14.NoParams? params) =>
       (super.noSuchMethod(Invocation.method(#call, [params]),
               returnValue: Future<
-                      _i3.Either<_i10.Failure<String>, List<_i12.User>>>.value(
-                  _FakeEither_1<_i10.Failure<String>, List<_i12.User>>()))
-          as _i5.Future<_i3.Either<_i10.Failure<String>, List<_i12.User>>>);
+                      _i3.Either<_i11.Failure<String>, List<_i13.User>>>.value(
+                  _FakeEither_1<_i11.Failure<String>, List<_i13.User>>()))
+          as _i6.Future<_i3.Either<_i11.Failure<String>, List<_i13.User>>>);
 }
 
 /// A class which mocks [PostRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPostRemoteDataSource extends _i1.Mock
-    implements _i14.PostRemoteDataSource {
+    implements _i15.PostRemoteDataSource {
   MockPostRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<List<_i15.PostModel>> fetchPosts([int? userId]) =>
+  _i6.Future<List<_i16.PostModel>> fetchPosts([int? userId]) =>
       (super.noSuchMethod(Invocation.method(#fetchPosts, [userId]),
               returnValue:
-                  Future<List<_i15.PostModel>>.value(<_i15.PostModel>[]))
-          as _i5.Future<List<_i15.PostModel>>);
+                  Future<List<_i16.PostModel>>.value(<_i16.PostModel>[]))
+          as _i6.Future<List<_i16.PostModel>>);
+}
+
+/// A class which mocks [PostRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPostRepository extends _i1.Mock implements _i5.PostRepository {
+  MockPostRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.Future<_i3.Either<_i11.Failure<String>, List<_i16.PostModel>>> getPosts(
+          [int? userId]) =>
+      (super.noSuchMethod(Invocation.method(#getPosts, [userId]),
+          returnValue: Future<
+                  _i3.Either<_i11.Failure<String>, List<_i16.PostModel>>>.value(
+              _FakeEither_1<_i11.Failure<String>, List<_i16.PostModel>>())) as _i6
+          .Future<_i3.Either<_i11.Failure<String>, List<_i16.PostModel>>>);
+}
+
+/// A class which mocks [FetchPosts].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFetchPosts extends _i1.Mock implements _i17.FetchPosts {
+  MockFetchPosts() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.PostRepository get repository =>
+      (super.noSuchMethod(Invocation.getter(#repository),
+          returnValue: _FakePostRepository_3()) as _i5.PostRepository);
+  @override
+  _i6.Future<_i3.Either<_i11.Failure<String>, List<_i18.Post>>> call(
+          [int? params]) =>
+      (super.noSuchMethod(Invocation.method(#call, [params]),
+              returnValue: Future<
+                      _i3.Either<_i11.Failure<String>, List<_i18.Post>>>.value(
+                  _FakeEither_1<_i11.Failure<String>, List<_i18.Post>>()))
+          as _i6.Future<_i3.Either<_i11.Failure<String>, List<_i18.Post>>>);
 }
