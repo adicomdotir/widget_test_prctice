@@ -1,17 +1,12 @@
-import 'package:equatable/equatable.dart';
+import 'package:widget_test_practice/clean_architecture/sample_01/features/posts/domain/entities/post.dart';
 
-class PostModel extends Equatable {
-  final int id;
-  final int userId;
-  final String title;
-  final String body;
-
+class PostModel extends Post {
   const PostModel({
-    required this.id,
-    required this.userId,
-    required this.title,
-    required this.body,
-  });
+    required int id,
+    required int userId,
+    required String title,
+    required String body,
+  }): super(id: id, userId: userId, title: title, body: body);
 
   factory PostModel.fromJson(Map<String, dynamic> json) => PostModel(
         id: json['id'],
@@ -26,7 +21,4 @@ class PostModel extends Equatable {
     'title': title,
     'body': body,
   };
-
-  @override
-  List<Object?> get props => [id, userId, title, body];
 }

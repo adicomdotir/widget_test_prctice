@@ -14,6 +14,10 @@ import 'package:widget_test_practice/clean_architecture/sample_01/core/error/fai
     as _i10;
 import 'package:widget_test_practice/clean_architecture/sample_01/core/use_cases/use_case.dart'
     as _i13;
+import 'package:widget_test_practice/clean_architecture/sample_01/features/posts/data/data_sources/remote/post_remote_data_source.dart'
+    as _i14;
+import 'package:widget_test_practice/clean_architecture/sample_01/features/posts/data/models/post_model.dart'
+    as _i15;
 import 'package:widget_test_practice/clean_architecture/sample_01/features/users/data/data_sources/remote/user_remote_data_source.dart'
     as _i8;
 import 'package:widget_test_practice/clean_architecture/sample_01/features/users/domain/repositories/user_repository.dart'
@@ -119,4 +123,21 @@ class MockFetchUsers extends _i1.Mock implements _i11.FetchUsers {
                       _i3.Either<_i10.Failure<String>, List<_i12.User>>>.value(
                   _FakeEither_1<_i10.Failure<String>, List<_i12.User>>()))
           as _i5.Future<_i3.Either<_i10.Failure<String>, List<_i12.User>>>);
+}
+
+/// A class which mocks [PostRemoteDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockPostRemoteDataSource extends _i1.Mock
+    implements _i14.PostRemoteDataSource {
+  MockPostRemoteDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<List<_i15.PostModel>> fetchPosts([int? userId]) =>
+      (super.noSuchMethod(Invocation.method(#fetchPosts, [userId]),
+              returnValue:
+                  Future<List<_i15.PostModel>>.value(<_i15.PostModel>[]))
+          as _i5.Future<List<_i15.PostModel>>);
 }
