@@ -1,4 +1,5 @@
 
+import 'package:widget_test_practice/clean_architecture/sample_01/features/posts/data/models/post_model.dart';
 import 'package:widget_test_practice/clean_architecture/sample_01/shared/data/models/user_model.dart';
 
 const mockUser = UserModel(
@@ -23,24 +24,24 @@ const mockUsers = [
   )
 ];
 
-// const mockPost = PostModel(
-//   id: 1,
-//   userId: 1,
-//   title: 'Title',
-//   body: 'Body',
-// );
-//
-// const mockPosts = [
-//   PostModel(
-//     id: 1,
-//     userId: 1,
-//     title: 'Title',
-//     body: 'Body',
-//   ),
-//   PostModel(
-//     id: 2,
-//     userId: 2,
-//     title: 'Title',
-//     body: 'Body',
-//   )
-// ];
+const mockPost = PostModel(
+  id: 1,
+  userId: 1,
+  title: 'Title',
+  body: 'Body',
+);
+
+const mockPosts = [
+  PostModel(
+    id: 1,
+    userId: 1,
+    title: 'Title',
+    body: 'Body',
+  ),
+  PostModel(
+    id: 2,
+    userId: 2,
+    title: 'Title',
+    body: 'Body',
+  )
+];
