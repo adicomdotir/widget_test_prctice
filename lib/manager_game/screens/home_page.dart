@@ -7,6 +7,7 @@ import 'package:widget_test_practice/manager_game/models/team.dart';
 import 'package:provider/provider.dart';
 import 'package:widget_test_practice/manager_game/providers/game_provider.dart';
 import 'package:widget_test_practice/manager_game/screens/widgets/my_bottom_appbar.dart';
+import 'package:widget_test_practice/manager_game/team_name.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -30,7 +31,8 @@ class _HomePageState extends State<HomePage> {
   void createTeam() {
     final teamList = <Team>[];
     for (var i = 0; i < leagueSize; i++) {
-      final team = Team(i, 'Team ${i + 1}');
+      int rnd = Random().nextInt(teamNameMock.length);
+      final team = Team(i, teamNameMock[rnd]);
       teamList.add(team);
     }
     context.read<GameProvider>().addTeams(teamList);
@@ -62,20 +64,6 @@ class _HomePageState extends State<HomePage> {
     }
     context.read<GameProvider>().addFixtures(fixtureList);
   }
-
-  // void playWeekGame() {
-  //   if (context.read<GameProvider>().week < leagueSize) {
-  //     setState(() {
-  //       fixtureList
-  //           .where((fixture) => fixture.weekId == context.read<GameProvider>().week)
-  //           .forEach((fixture) {
-  //         fixture.homeTeamGoal = Random().nextInt(5);
-  //         fixture.awayTeamGoal = Random().nextInt(5);
-  //       });
-  //     });
-  //     context.read<GameProvider>().gotoNextWeek();
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
