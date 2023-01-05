@@ -12,16 +12,16 @@ final sl = GetIt.instance;
 
 class AppRoutes {
   static String initial = '/';
-  static String home = 'home page';
-  static String login = 'login page';
-  static String register = 'register page';
+  static String home = 'home';
+  static String fixture = 'fixture';
+  static String league = 'league';
 }
 
 final routeGenerate = {
   AppRoutes.initial: (context) => const HomePage(),
   AppRoutes.home: (context) => const HomePage(),
-  AppRoutes.login: (context) => const LoginPage(),
-  AppRoutes.register: (context) => const RegisterPage(),
+  AppRoutes.fixture: (context) => const LoginPage(),
+  AppRoutes.league: (context) => const RegisterPage(),
 };
 
 class Team {
@@ -53,9 +53,6 @@ void main() {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.amber,
-      ),
       routes: routeGenerate,
       initialRoute: AppRoutes.initial,
     ),
@@ -116,15 +113,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   void playWeekGame() {
-    setState(() {
-      for (var element in fixtureList) {
-        if (element.weekId == weekId) {
-          element.homeTeamGoal = Random().nextInt(5);
-          element.awayTeamGoal = Random().nextInt(5);
-        }
-      }
-      weekId += 1;
-    });
+    if (weekId < leagueSize) {
+      setState(() {
+        fixtureList
+            .where((fixture) => fixture.weekId == weekId)
+            .forEach((fixture) {
+          fixture.homeTeamGoal = Random().nextInt(5);
+          fixture.awayTeamGoal = Random().nextInt(5);
+        });
+        weekId += 1;
+      });
+    }
   }
 
   @override
@@ -141,6 +140,7 @@ class _HomePageState extends State<HomePage> {
     // print(AppBar().preferredSize.height);
     // print(MediaQuery.of(context).padding);
     return Scaffold(
+      backgroundColor: Colors.grey,
       appBar: AppBar(
         title: const Text('Home'),
         actions: [
@@ -152,82 +152,185 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Container(
-        color: Colors.grey,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.navigate_next),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        color: Theme.of(context).primaryColor,
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 5,
+        child: SizedBox(
+          height: 50,
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              MaterialButton(
+                onPressed: () {},
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.home_outlined,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      'Home',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              MaterialButton(
+                onPressed: () {},
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.schedule,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      'Fixture',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                width: 50,
+              ),
+              MaterialButton(
+                onPressed: () {},
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.group_work_outlined,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      'League',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              MaterialButton(
+                onPressed: () {},
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.more_outlined,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      'Other',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height -
             AppBar().preferredSize.height -
             MediaQuery.of(context).padding.top,
         child: SingleChildScrollView(
           child: Column(
-            children: List.generate(
-              leagueSize - 1,
-              (weekIdx) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Week ${weekIdx + 1}',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w700,
+            children: [
+              ...List.generate(
+                leagueSize - 1,
+                (weekIdx) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Week ${weekIdx + 1}',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          ...List.generate(
-                            leagueSize ~/ 2,
-                            (index) {
-                              final weekFixture = fixtureList
-                                  .where((fixture) => fixture.weekId == weekIdx)
-                                  .toList();
-                              return Row(
-                                children: [
-                                  Flexible(
-                                    child: textWithContainer(
-                                      Colors.green,
-                                      returnTeamName(
-                                          weekFixture[index].homeTeamId),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            ...List.generate(
+                              leagueSize ~/ 2,
+                              (index) {
+                                final weekFixture = fixtureList
+                                    .where(
+                                        (fixture) => fixture.weekId == weekIdx)
+                                    .toList();
+                                return Row(
+                                  children: [
+                                    Flexible(
+                                      child: textWithContainer(
+                                        Colors.green,
+                                        returnTeamName(
+                                            weekFixture[index].homeTeamId),
+                                      ),
+                                      fit: FlexFit.tight,
                                     ),
-                                    fit: FlexFit.tight,
-                                  ),
-                                  Flexible(
-                                    child: textWithContainer(
-                                      Colors.green,
-                                      '${returnValidDataForGoal(weekFixture[index].homeTeamGoal)} - ${returnValidDataForGoal(weekFixture[index].awayTeamGoal)}',
+                                    Flexible(
+                                      child: textWithContainer(
+                                        Colors.green,
+                                        '${returnValidDataForGoal(weekFixture[index].homeTeamGoal)} - ${returnValidDataForGoal(weekFixture[index].awayTeamGoal)}',
+                                      ),
+                                      fit: FlexFit.tight,
                                     ),
-                                    fit: FlexFit.tight,
-                                  ),
-                                  Flexible(
-                                    child: textWithContainer(
-                                      Colors.green,
-                                      returnTeamName(
-                                          weekFixture[index].awayTeamId),
+                                    Flexible(
+                                      child: textWithContainer(
+                                        Colors.green,
+                                        returnTeamName(
+                                            weekFixture[index].awayTeamId),
+                                      ),
+                                      fit: FlexFit.tight,
                                     ),
-                                    fit: FlexFit.tight,
-                                  ),
-                                ],
-                              );
-                            },
-                          )
-                        ],
+                                  ],
+                                );
+                              },
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
-            ),
+                  );
+                },
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget textWithContainer(Color color, String txt) => Container(
+  Widget textWithContainer(Color color, String txt) => SizedBox(
         height: 30,
         child: Center(child: Text(txt)),
       );
@@ -265,9 +368,9 @@ class RegisterPage extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                Navigator.pushReplacementNamed(context, AppRoutes.login);
+                Navigator.pushReplacementNamed(context, AppRoutes.fixture);
               },
-              child: Text(AppRoutes.login.toUpperCase()),
+              child: Text(AppRoutes.fixture.toUpperCase()),
             ),
             const SizedBox(
               height: 20.0,

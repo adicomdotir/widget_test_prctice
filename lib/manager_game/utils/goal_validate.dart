@@ -1,0 +1,1 @@
+String goalValidate(int goal) => goal == -1 ? 'X' : goal.toString();
