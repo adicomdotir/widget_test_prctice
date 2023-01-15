@@ -21,7 +21,8 @@ class MyBottomAppBar extends StatelessWidget {
           children: <Widget>[
             MaterialButton(
               onPressed: () {
-                String currentRoute = ModalRoute.of(context)?.settings.name ?? '';
+                String currentRoute =
+                    ModalRoute.of(context)?.settings.name ?? '';
                 if (currentRoute != AppRoutes.home) {
                   Navigator.pushNamed(context, AppRoutes.home);
                 }
@@ -68,7 +69,9 @@ class MyBottomAppBar extends StatelessWidget {
               width: 50,
             ),
             MaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.league);
+              },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [

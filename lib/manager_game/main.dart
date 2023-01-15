@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:widget_test_practice/manager_game/providers/game_provider.dart';
 import 'package:widget_test_practice/manager_game/screens/fixture_page.dart';
 import 'package:widget_test_practice/manager_game/screens/home_page.dart';
+import 'package:widget_test_practice/manager_game/screens/league_page.dart';
 import 'package:widget_test_practice/manager_game/screens/match_page.dart';
-
 
 final sl = GetIt.instance;
 
@@ -19,7 +19,7 @@ class AppRoutes {
 final routeGenerate = {
   AppRoutes.home: (context) => const HomePage(),
   AppRoutes.fixture: (context) => const FixturePage(),
-  AppRoutes.league: (context) => const HomePage(),
+  AppRoutes.league: (context) => const LeaguePage(),
   AppRoutes.match: (context) => const MatchPage(),
 };
 
