@@ -87,6 +87,8 @@ flutter:
     - assets/travel_booking_app/icons/
     - assets/travel_booking_app/images/
     - assets/travel_booking_app/svg/
+    - assets/tesla_animated_app/icons/
+    - assets/tesla_animated_app/images/
     # - assets/data.json
     # - assets/placeholder.png
 
