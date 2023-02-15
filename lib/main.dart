@@ -7,52 +7,24 @@ void main() {
         appBar: AppBar(),
         body: Stack(
           children: [
-            Positioned(
-              top: 0,
-              left: 0,
-              child: ClipPath(
-                clipper: MyClipper(status: ClipperPosition.topLeft),
-                child: Container(
-                  color: Colors.redAccent,
-                  width: 200,
-                  height: 200,
-                ),
+            const Text(
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            ),
+            ClipPath(
+              clipper: WaveClipper(),
+              child: Container(
+                color: Colors.red.withOpacity(.8),
+                height: 220,
+                alignment: Alignment.center,
               ),
             ),
-            Positioned(
-              top: 0,
-              right: 0,
-              child: ClipPath(
-                clipper: MyClipper(status: ClipperPosition.topRight),
-                child: Container(
-                  color: Colors.blueAccent,
-                  width: 200,
-                  height: 200,
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              child: ClipPath(
-                clipper: MyClipper(status: ClipperPosition.bottomLeft),
-                child: Container(
-                  color: Colors.pinkAccent,
-                  width: 200,
-                  height: 200,
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: ClipPath(
-                clipper: MyClipper(status: ClipperPosition.bottomRight),
-                child: Container(
-                  color: Colors.limeAccent,
-                  width: 200,
-                  height: 200,
-                ),
+            ClipPath(
+              clipper: WaveClipper(waveDeep: 0, waveDeep2: 100),
+              child: Container(
+                padding: const EdgeInsets.only(bottom: 50),
+                color: Colors.blue.withOpacity(.3),
+                height: 180,
+                alignment: Alignment.center,
               ),
             ),
           ],
@@ -110,5 +82,51 @@ class MyClipper extends CustomClipper<Path> {
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
     return true;
+  }
+}
+
+class WaveClipper extends CustomClipper<Path> {
+  final double waveDeep;
+  final double waveDeep2;
+
+  WaveClipper({
+    this.waveDeep = 100,
+    this.waveDeep2 = 0,
+  });
+
+  @override
+  Path getClip(Size size) {
+    final double sw = size.width;
+    final double sh = size.height;
+
+    final Offset controlPoint1 = Offset(sw * .25, sh - waveDeep2 * 2);
+    final Offset destinationPoint1 = Offset(sw * .5, sh - waveDeep - waveDeep2);
+
+    final Offset controlPoint2 = Offset(sw * .75, sh - waveDeep * 2);
+    final Offset destinationPoint2 = Offset(sw, sh - waveDeep);
+
+    final Path path = Path()
+      ..lineTo(0, size.height - waveDeep2)
+      ..quadraticBezierTo(
+        controlPoint1.dx,
+        controlPoint1.dy,
+        destinationPoint1.dx,
+        destinationPoint1.dy,
+      )
+      ..quadraticBezierTo(
+        controlPoint2.dx,
+        controlPoint2.dy,
+        destinationPoint2.dx,
+        destinationPoint2.dy,
+      )
+      ..lineTo(size.width, 0)
+      ..lineTo(0, 0)
+      ..close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
   }
 }
