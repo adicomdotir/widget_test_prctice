@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 
 void main(List<String> args) {
   runApp(
-    const MaterialApp(
+    MaterialApp(
       home: Scaffold(
-        body: NewWidget(),
+        backgroundColor: Colors.grey.shade200,
+        body: const NewWidget(),
       ),
     ),
   );
@@ -22,23 +23,38 @@ class NewWidget extends StatefulWidget {
 }
 
 class _NewWidgetState extends State<NewWidget> {
+  List<int> temps = [];
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
-          child: Text('upper'),
+          child: ListView.builder(
+            itemCount: temps.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: CircleAvatar(
+                  child: Text('${index + 1}'),
+                ),
+                title: Text(temps[index].toString()),
+                subtitle: Text(temps[index].toString()),
+              );
+            },
+          ),
         ),
         Stack(
           children: [
             Container(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               height: 120,
-              color: Colors.amber,
               child: ClipPath(
                 clipper: MyCustomClipper(),
                 child: Container(
-                  color: Colors.redAccent,
+                  decoration: BoxDecoration(
+                    color: Colors.redAccent,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
                 ),
               ),
             ),
@@ -58,16 +74,25 @@ class _NewWidgetState extends State<NewWidget> {
       top: parentPadding + parentPadding / 2,
       left:
           (width - parentPadding * 2) * 0.4 + parentPadding + parentPadding / 2,
-      child: InkWell(
-        splashColor: Colors.yellow,
-        child: Container(
-          width: (width - parentPadding * 2) * 0.2 - parentPadding,
-          height: (width - parentPadding * 2) * 0.2 - parentPadding,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.blueAccent,
+      child: Container(
+        width: (width - parentPadding * 2) * 0.2 - parentPadding,
+        height: (width - parentPadding * 2) * 0.2 - parentPadding,
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.blueAccent,
+        ),
+        child: Material(
+          color: Colors.transparent,
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+            splashColor: Colors.green,
+            onTap: () {
+              int rnd = Math.Random().nextInt(9999);
+              temps.add(rnd);
+              setState(() {});
+            },
+            child: Icon(Icons.add),
           ),
-          child: Icon(Icons.add),
         ),
       ),
     );
