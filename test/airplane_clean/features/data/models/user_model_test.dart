@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:widget_test_practice/clean_architecture/airplane_clean/data/models/domain/entities/user_entity.dart';
 import 'package:widget_test_practice/clean_architecture/airplane_clean/data/models/user_model.dart';
+import 'package:widget_test_practice/clean_architecture/airplane_clean/domain/entities/user_entity.dart';
 
 import '../../../fixtures/fixture_reader.dart';
 
@@ -30,9 +30,21 @@ void main() {
       // assert
       expect(result, tUserModel);
     });
+  });
 
-    group('toJson', () {
-      test('should return a json map containing proper data', () async {});
+  group('toJson', () {
+    test('should return a json map containing proper data', () async {
+      final result = tUserModel.toJson();
+
+      final expectedMap = {
+        'id': tUserModel.id,
+        'email': tUserModel.email,
+        'name': tUserModel.name,
+        'hobby': tUserModel.hobby,
+        'balance': tUserModel.balance,
+      };
+
+      expect(result, expectedMap);
     });
   });
 }

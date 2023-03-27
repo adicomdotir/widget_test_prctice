@@ -1,4 +1,4 @@
-import 'package:widget_test_practice/clean_architecture/airplane_clean/data/models/domain/entities/user_entity.dart';
+import 'package:widget_test_practice/clean_architecture/airplane_clean/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   final String id;
@@ -23,5 +23,15 @@ class UserModel extends UserEntity {
       hobby: jsonMap['hobby'] ?? '',
       balance: jsonMap['balance'] ?? 0,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'email': email,
+      'name': name,
+      'hobby': hobby,
+      'balance': balance,
+    };
   }
 }
