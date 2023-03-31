@@ -4,6 +4,8 @@ import 'package:widget_test_practice/clean_architecture/sample_02/features/numbe
 import 'package:widget_test_practice/clean_architecture/sample_02/features/number_trivia/presentation/bloc/number_trivia_state.dart';
 import 'package:widget_test_practice/clean_architecture/sample_02/features/number_trivia/presentation/widgets/loading_widget.dart';
 import 'package:widget_test_practice/clean_architecture/sample_02/features/number_trivia/presentation/widgets/message_display.dart';
+import 'package:widget_test_practice/clean_architecture/sample_02/features/number_trivia/presentation/widgets/trivia_controls.dart';
+import 'package:widget_test_practice/clean_architecture/sample_02/features/number_trivia/presentation/widgets/trivia_desplay.dart';
 
 import '../../../../injection_container.dart';
 
@@ -42,7 +44,7 @@ class NumberTriviaPage extends StatelessWidget {
                   } else if (state is Loading) {
                     return const LoadingWidget();
                   } else if (state is Loaded) {
-                    return TriviaDisplay(numberTrivia: state.trivia);
+                    return TriviaDisplay(triviaNumber: state.trivia);
                   } else if (state is ErrorState) {
                     return MessageDisplay(
                       message: state.message,
@@ -55,7 +57,7 @@ class NumberTriviaPage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              TriviaControls()
+              const TriviaControls()
             ],
           ),
         ),
