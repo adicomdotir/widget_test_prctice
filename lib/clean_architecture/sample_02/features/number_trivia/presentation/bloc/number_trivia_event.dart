@@ -1,9 +1,10 @@
 abstract class NumberTriviaEvent {}
 
 class GetTriviaForConcreteNumber extends NumberTriviaEvent {
-  GetTriviaForConcreteNumber(String input);
+  final String numberString;
+  GetTriviaForConcreteNumber(this.numberString);
 }
 
 class GetTriviaForRandomNumber extends NumberTriviaEvent {
-  GetTriviaForRandomNumber(String input);
+  GetTriviaForRandomNumber();
 }

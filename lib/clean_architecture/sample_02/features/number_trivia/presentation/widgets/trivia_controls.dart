@@ -70,7 +70,6 @@ class _TriviaControlsState extends State<TriviaControls> {
 
   void dispatchRandom() {
     controller.clear();
-    BlocProvider.of<NumberTriviaBloc>(context)
-        .add(GetTriviaForRandomNumber(input));
+    BlocProvider.of<NumberTriviaBloc>(context).add(GetTriviaForRandomNumber());
   }
 }
