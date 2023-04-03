@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:widget_test_practice/ui_tutorials/temprature_slider/thermo.dart';
 
 void main(List<String> args) {
   runApp(const App());
@@ -59,7 +60,9 @@ class TemperatureView extends StatelessWidget {
                             Positioned.fill(
                               child: Container(
                                 color: Colors.amberAccent,
-                                child: Text('1'),
+                                child: Thermo(
+                                  temperature: temperature.value,
+                                ),
                               ),
                             ),
                             Positioned.fill(
