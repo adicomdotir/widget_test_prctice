@@ -3,6 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main(List<String> args) {
+  var foo = const ['a']; // if you want add value to this list throw exception!
+  print(foo);
+  foo = [];
+  print(foo);
+
   runApp(
     const MaterialApp(
       home: Scaffold(

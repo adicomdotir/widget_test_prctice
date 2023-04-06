@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -27,11 +28,30 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <title>widget_test_practice</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- The core Firebase JS SDK (always required for using any Firebase service) -->
+  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+  <!-- Firebase Auth SDK -->
+  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-auth.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA6tfzvyPxfjuQeZFCRefgAverBhC7-908",
+      authDomain: "sample03-b91df.firebaseapp.com",
+      projectId: "sample03-b91df",
+      storageBucket: "sample03-b91df.appspot.com",
+      messagingSenderId: "374086088209",
+      appId: "1:374086088209:web:4f4bf5d60fa391b8c3a3b0"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+  </script>
 </head>
+
 <body>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
@@ -101,4 +121,5 @@
     }
   </script>
 </body>
+
 </html>
