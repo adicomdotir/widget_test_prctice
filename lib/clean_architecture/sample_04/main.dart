@@ -49,6 +49,7 @@ class HomeScreen extends StatelessWidget {
       ),
       child: Builder(
         builder: (context) {
+          BlocProvider.of<ExpenseBloc>(context).add(GetAllExpenseEvent());
           return Scaffold(
             appBar: AppBar(),
             body: Padding(
@@ -58,13 +59,13 @@ class HomeScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          BlocProvider.of<ExpenseBloc>(context)
-                              .add(GetAllExpenseEvent());
-                        },
-                        child: const Text('Get All Expenses'),
-                      ),
+                      // ElevatedButton(
+                      //   onPressed: () {
+                      //     BlocProvider.of<ExpenseBloc>(context)
+                      //         .add(GetAllExpenseEvent());
+                      //   },
+                      //   child: const Text('Get All Expenses'),
+                      // ),
                       ElevatedButton(
                         onPressed: () {
                           int rnd = Random().nextInt(9999);
@@ -80,6 +81,13 @@ class HomeScreen extends StatelessWidget {
                               .add(AddExpenseEvent(expenseEntity));
                         },
                         child: const Text('Add Expense'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          BlocProvider.of<ExpenseBloc>(context)
+                              .add(GetAllExpenseEvent());
+                        },
+                        child: const Text('Delete All Expenses'),
                       ),
                     ],
                   ),
@@ -122,8 +130,9 @@ class HomeScreen extends StatelessWidget {
       itemBuilder: (context, index) {
         final expense = expenses[index];
         return ListTile(
-          title: Text('Price: ${expense.amount}'),
+          title: Text('Price: \$${expense.amount}'),
           subtitle: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Category: ${expense.category}'),
               const SizedBox(

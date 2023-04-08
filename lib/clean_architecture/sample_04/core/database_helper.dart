@@ -19,10 +19,11 @@ class DatabaseHelper {
 
   Future<List<ExpenseModel>> getAllExpenses() async {
     await Hive.openBox('expenses');
-
     final box = Hive.box('expenses');
-
-    return box.values.map((e) => ExpenseModel.fromJson(jsonDecode(e))).toList();
+    final expenses =
+        box.values.map((e) => ExpenseModel.fromJson(jsonDecode(e))).toList();
+    expenses.sort((a, b) => b.date - a.date);
+    return expenses;
   }
 
   Future<void> deleteExpense(ExpenseModel expenseModel) async {
