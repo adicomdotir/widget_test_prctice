@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'data/data_source/firebase_user_data_source.dart';
@@ -9,7 +8,6 @@ import 'presentation/sign_up_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
 
   final firebaseUserDataSource = FirebaseUserDataSource();
   final userRepository = UserRepositoryImpl(
