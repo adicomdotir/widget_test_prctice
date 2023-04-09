@@ -6,6 +6,8 @@ abstract class ExpenseDataSource {
 
   Future<void> deleteExpesne(ExpenseModel expenseModel);
 
+  Future<void> deleteAllExpesne();
+
   Future<List<ExpenseModel>> getAllExpenses();
 }
 
@@ -27,5 +29,10 @@ class ExpenseDataSourceImpl extends ExpenseDataSource {
   @override
   Future<void> deleteExpesne(ExpenseModel expenseModel) {
     return databaseHelper.deleteExpense(expenseModel);
+  }
+
+  @override
+  Future<void> deleteAllExpesne() {
+    return databaseHelper.deleteAllExpense();
   }
 }

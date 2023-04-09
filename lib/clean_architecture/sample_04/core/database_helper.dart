@@ -30,4 +30,10 @@ class DatabaseHelper {
     await Hive.openBox('expenses');
     await Hive.box('expenses').delete(expenseModel.id);
   }
+
+  Future<void> deleteAllExpense() async {
+    await Hive.openBox('expenses');
+    final box = Hive.box('expenses');
+    box.deleteAll(box.keys);
+  }
 }

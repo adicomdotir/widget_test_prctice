@@ -26,4 +26,9 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
   void updateExpense(ExpenseModel expenseModel) {
     // TODO: implement updateExpense
   }
+
+  @override
+  Future<void> deleteAllExpense() {
+    return dataSource.deleteAllExpesne();
+  }
 }

@@ -8,6 +8,7 @@ import 'package:widget_test_practice/clean_architecture/sample_04/data/data_sour
 import 'package:widget_test_practice/clean_architecture/sample_04/data/respsitories/expesne_repository_impl.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/domain/entities/expense_entity.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/domain/use_cases/add_expense.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/domain/use_cases/delete_all_expense.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/domain/use_cases/delete_expense.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/domain/use_cases/get_all_expenses.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/presentation/bloc/expense_bloc.dart';
@@ -40,12 +41,15 @@ class HomeScreen extends StatelessWidget {
     final getAllExpenses = GetAllExpenses(expenseRepository: expenseRepository);
     final addExpense = AddExpense(expenseRepository: expenseRepository);
     final deleteExpense = DeleteExpense(expenseRepository: expenseRepository);
+    final deleteAllExpense =
+        DeleteAllExpense(expenseRepository: expenseRepository);
 
     return BlocProvider(
       create: (context) => ExpenseBloc(
         getAllExpenses,
         addExpense,
         deleteExpense,
+        deleteAllExpense,
       ),
       child: Builder(
         builder: (context) {
@@ -85,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                       ElevatedButton(
                         onPressed: () {
                           BlocProvider.of<ExpenseBloc>(context)
-                              .add(GetAllExpenseEvent());
+                              .add(DeleteAllExpenseEvent());
                         },
                         child: const Text('Delete All Expenses'),
                       ),
