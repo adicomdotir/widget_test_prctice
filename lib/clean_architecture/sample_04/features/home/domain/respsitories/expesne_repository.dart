@@ -1,4 +1,4 @@
-import 'package:widget_test_practice/clean_architecture/sample_04/data/models/expense_model.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/data/models/expense_model.dart';
 
 abstract class ExpenseRepository {
   Future<void> addExpense(ExpenseModel expenseModel);

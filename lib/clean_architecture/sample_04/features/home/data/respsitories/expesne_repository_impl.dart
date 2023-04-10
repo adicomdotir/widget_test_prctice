@@ -1,6 +1,6 @@
-import 'package:widget_test_practice/clean_architecture/sample_04/data/data_sources/expense_data_source.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/data/models/expense_model.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/domain/respsitories/expesne_repository.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/home/data/data_sources/expense_data_source.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/home/domain/respsitories/expesne_repository.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/data/models/expense_model.dart';
 
 class ExpenseRepositoryImpl extends ExpenseRepository {
   final ExpenseDataSource dataSource;

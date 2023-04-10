@@ -1,5 +1,5 @@
 import 'package:widget_test_practice/clean_architecture/sample_04/core/database_helper.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/data/models/expense_model.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/data/models/expense_model.dart';
 
 abstract class ExpenseDataSource {
   Future<void> addExpesne(ExpenseModel expenseModel);

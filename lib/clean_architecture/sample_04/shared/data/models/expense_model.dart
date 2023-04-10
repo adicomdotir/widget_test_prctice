@@ -1,5 +1,4 @@
-import 'package:hive/hive.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/domain/entities/expense_entity.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/domain/entities/expense_entity.dart';
 
 class ExpenseModel extends ExpenseEntity {
   ExpenseModel({

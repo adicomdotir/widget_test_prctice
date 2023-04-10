@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/data/models/expense_model.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/data/models/expense_model.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/data/models/report_model.dart';
 
 class DatabaseHelper {
   final String path;
@@ -35,5 +36,23 @@ class DatabaseHelper {
     await Hive.openBox('expenses');
     final box = Hive.box('expenses');
     box.deleteAll(box.keys);
+  }
+
+  Future<List<ReportModel>> getReport() async {
+    await Hive.openBox('expenses');
+    final box = Hive.box('expenses');
+    final expenses =
+        box.values.map((e) => ExpenseModel.fromJson(jsonDecode(e))).toList();
+    final categories =
+        expenses.map((expenseModel) => expenseModel.category).toSet();
+    List<ReportModel> reports = [];
+    for (var category in categories) {
+      final result = expenses
+          .where((expenseModel) => expenseModel.category == category)
+          .map((expenseModel) => expenseModel.amount)
+          .reduce((value, amount) => amount + value);
+      reports.add(ReportModel(category: category, amount: result));
+    }
+    return reports;
   }
 }

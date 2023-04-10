@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/domain/entities/expense_entity.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/domain/use_cases/add_expense.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/domain/use_cases/delete_all_expense.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/domain/use_cases/delete_expense.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/domain/use_cases/get_all_expenses.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/home/domain/use_cases/add_expense.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/home/domain/use_cases/delete_all_expense.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/home/domain/use_cases/delete_expense.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/home/domain/use_cases/get_all_expenses.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/domain/entities/expense_entity.dart';
 
 class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   final GetAllExpenses getAllExpenses;
