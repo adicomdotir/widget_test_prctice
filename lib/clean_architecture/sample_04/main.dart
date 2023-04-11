@@ -19,4 +19,9 @@ List<String> categories = [
   'Home',
   'Technonogy',
   'Smoke',
+  'Sport',
+  'Entertainment',
+  'Work',
+  'Travel',
+  'Wife',
 ];

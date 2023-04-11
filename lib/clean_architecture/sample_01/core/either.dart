@@ -46,7 +46,8 @@ class Success<E, S> extends Either<E, S> {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) || other is Success && other._success == _success;
+    return identical(this, other) ||
+        other is Success && other._success == _success;
   }
 
   @override
@@ -85,12 +86,12 @@ class Error<E, S> extends Either<E, S> {
   int get hashCode => _error.hashCode;
 }
 
-@immutable
-class Unit {
-  const Unit._internal();
+// @immutable
+// class Unit {
+//   const Unit._internal();
 
-  @override
-  String toString() => '()';
-}
+//   @override
+//   String toString() => '()';
+// }
 
-const unit = Unit._internal();
+// const unit = Unit._internal();
