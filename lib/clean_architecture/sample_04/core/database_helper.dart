@@ -53,6 +53,7 @@ class DatabaseHelper {
           .reduce((value, amount) => amount + value);
       reports.add(ReportModel(category: category, amount: result));
     }
+    reports.sort((a, b) => b.amount.round() - a.amount.round());
     return reports;
   }
 }

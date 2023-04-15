@@ -130,8 +130,8 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           leading: CircleAvatar(
-            backgroundColor: Colors.greenAccent,
-            foregroundColor: Colors.black,
+            backgroundColor: Theme.of(context).primaryColor,
+            foregroundColor: Colors.white,
             child: Text((index + 1).toString()),
           ),
           trailing: IconButton(
