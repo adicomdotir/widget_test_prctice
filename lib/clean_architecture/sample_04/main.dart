@@ -13,7 +13,7 @@ void main() async {
   );
 }
 
-List<String> categories = [
+List<String> categoriesMockData = [
   'Food',
   'Car',
   'Home',

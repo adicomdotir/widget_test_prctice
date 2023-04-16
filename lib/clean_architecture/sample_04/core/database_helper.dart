@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/data/models/category_model.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/shared/data/models/expense_model.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/shared/data/models/report_model.dart';
 
@@ -47,13 +48,34 @@ class DatabaseHelper {
         expenses.map((expenseModel) => expenseModel.category).toSet();
     List<ReportModel> reports = [];
     for (var category in categories) {
-      final result = expenses
-          .where((expenseModel) => expenseModel.category == category)
+      final expensesFilterByCategory =
+          expenses.where((expenseModel) => expenseModel.category == category);
+      final result = expensesFilterByCategory
           .map((expenseModel) => expenseModel.amount)
           .reduce((value, amount) => amount + value);
-      reports.add(ReportModel(category: category, amount: result));
+      reports.add(
+        ReportModel(
+          category: category,
+          amount: result,
+          count: expensesFilterByCategory.length,
+        ),
+      );
     }
     reports.sort((a, b) => b.amount.round() - a.amount.round());
     return reports;
+  }
+
+  Future<void> addCategory(CategoryModel categoryModel) async {
+    await Hive.openBox('categories');
+    await Hive.box('categories')
+        .put(categoryModel.id, jsonEncode(categoryModel.toJson()));
+  }
+
+  Future<List<CategoryModel>> getAllCategories() async {
+    await Hive.openBox('categories');
+    final box = Hive.box('categories');
+    final categories =
+        box.values.map((e) => CategoryModel.fromJson(jsonDecode(e))).toList();
+    return categories;
   }
 }

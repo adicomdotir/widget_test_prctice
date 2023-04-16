@@ -69,8 +69,9 @@ class ReportScreen extends StatelessWidget {
                 leading: CircleAvatar(
                   backgroundColor: colors[index],
                 ),
-                title: Text('${report.category}  %${percent.round()}'),
+                title: Text('${report.category} %${percent.round()}'),
                 subtitle: Text('\$${report.amount.toString()}'),
+                trailing: Text('Count: ${report.count}'),
               );
             },
           ),

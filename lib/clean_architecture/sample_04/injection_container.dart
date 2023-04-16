@@ -1,5 +1,11 @@
 import 'package:get_it/get_it.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/core/database_helper.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/category/data/data_sources/category_data_source.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/category/data/repositories/category_repository_impl.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/repositories/category_repository.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/use_cases/add_category_use_case.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/use_cases/get_all_categories_use_case.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/bloc/category_bloc.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/home/data/data_sources/expense_data_source.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/home/data/respsitories/expesne_repository_impl.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/home/domain/respsitories/expesne_repository.dart';
@@ -24,6 +30,12 @@ Future<void> init() async {
   inject.registerFactory(
     () => ReportBloc(inject()),
   );
+  inject.registerFactory(
+    () => CategoryBloc(
+      getAllCategoriesUseCase: inject(),
+      addCategoryUseCase: inject(),
+    ),
+  );
 
   /// use cases
   inject.registerLazySingleton(
@@ -41,6 +53,12 @@ Future<void> init() async {
   inject.registerLazySingleton(
     () => GetReportUseCase(reportRepository: inject()),
   );
+  inject.registerLazySingleton(
+    () => GetAllCategoriesUseCase(repository: inject()),
+  );
+  inject.registerLazySingleton(
+    () => AddCategoryUseCase(repository: inject()),
+  );
 
   /// repository
   inject.registerLazySingleton<ExpenseRepository>(
@@ -49,6 +67,9 @@ Future<void> init() async {
   inject.registerLazySingleton<ReportRepository>(
     () => ReportRepositoryImpl(reportDataSource: inject()),
   );
+  inject.registerLazySingleton<CategoryRepository>(
+    () => CategoryRepositoryImpl(dataSource: inject()),
+  );
 
   /// data sources
   inject.registerLazySingleton<ExpenseDataSource>(
@@ -56,6 +77,9 @@ Future<void> init() async {
   );
   inject.registerLazySingleton<ReportDataSource>(
     () => ReportDataSourceImpl(databaseHelper: inject()),
+  );
+  inject.registerLazySingleton<CategoryDataSource>(
+    () => CategoryDataSourceImpl(databaseHelper: inject()),
   );
 
   /// database helper

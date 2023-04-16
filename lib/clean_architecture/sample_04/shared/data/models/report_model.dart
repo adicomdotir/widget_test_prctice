@@ -4,17 +4,20 @@ class ReportModel extends ReportEntity {
   ReportModel({
     required String category,
     required double amount,
-  }) : super(category: category, amount: amount);
+    required int count,
+  }) : super(category: category, amount: amount, count: count);
 
   Map<String, dynamic> toJson() {
     return {
       'category': category,
       'amount': amount,
+      'count': count,
     };
   }
 
   factory ReportModel.fromJson(Map<String, dynamic> json) => ReportModel(
         category: json['category'],
         amount: json['amount'],
+        count: json['count'],
       );
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/core/utils/date_format.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/core/utils/id_generator.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/screens/category_list_screen.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/home/presentation/bloc/expense_bloc.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/report/presentation/screens/report_screen.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/injection_container.dart'
@@ -32,6 +33,10 @@ class HomeScreen extends StatelessWidget {
                         value: 0,
                         child: Text('Report'),
                       ),
+                      const PopupMenuItem<int>(
+                        value: 1,
+                        child: Text('Category'),
+                      ),
                     ];
                   },
                   onSelected: (value) {
@@ -40,6 +45,13 @@ class HomeScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => const ReportScreen(),
+                        ),
+                      );
+                    } else if (value == 1) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CategoryListScreen(),
                         ),
                       );
                     }
@@ -57,8 +69,8 @@ class HomeScreen extends StatelessWidget {
                       ElevatedButton(
                         onPressed: () {
                           final random = Random();
-                          String category =
-                              categories[random.nextInt(categories.length)];
+                          String category = categoriesMockData[
+                              random.nextInt(categoriesMockData.length)];
                           final expenseEntity = ExpenseEntity(
                             id: idGenerator(),
                             category: category,
