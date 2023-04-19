@@ -27,14 +27,16 @@ class CategoryListScreen extends StatelessWidget {
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                final random = Random().nextInt(categoriesMockData.length);
-                final category = categoriesMockData[random];
-                final CategoryEntity categoryEntity = CategoryEntity(
-                  id: idGenerator(),
-                  title: category,
-                );
-                BlocProvider.of<CategoryBloc>(context)
-                    .add(AddCategoryEvent(categoryEntity));
+                Navigator.of(context)
+                    .push(
+                      MaterialPageRoute(
+                        builder: (context) => AddUpdateCategoryScreen(),
+                      ),
+                    )
+                    .then(
+                      (value) => BlocProvider.of<CategoryBloc>(context)
+                          .add(GetAllCategoryEvent()),
+                    );
               },
               child: const Icon(Icons.add),
             ),

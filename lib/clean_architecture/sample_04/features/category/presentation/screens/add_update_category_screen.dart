@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/core/utils/id_generator.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/bloc/category_bloc.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/bloc/category_event.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/bloc/category_state.dart';
@@ -9,13 +10,13 @@ import '../../../../injection_container.dart' as di;
 class AddUpdateCategoryScreen extends StatelessWidget {
   AddUpdateCategoryScreen({
     Key? key,
-    required this.categoryEntity,
+    this.categoryEntity,
   }) : super(key: key) {
-    titleController.text = categoryEntity.title;
+    titleController.text = categoryEntity?.title ?? '';
   }
 
   final TextEditingController titleController = TextEditingController();
-  final CategoryEntity categoryEntity;
+  final CategoryEntity? categoryEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +58,24 @@ class AddUpdateCategoryScreen extends StatelessWidget {
                         ElevatedButton(
                           onPressed: () {
                             if (titleController.text.trim().isNotEmpty) {
-                              CategoryEntity newCatetoryEntity = categoryEntity
-                                  .copyWith(newTitle: titleController.text);
-                              BlocProvider.of<CategoryBloc>(context)
-                                  .add(UpdateCategoryEvent(newCatetoryEntity));
+                              if (categoryEntity != null) {
+                                CategoryEntity newCatetoryEntity =
+                                    categoryEntity!.copyWith(
+                                  newTitle: titleController.text,
+                                );
+                                BlocProvider.of<CategoryBloc>(context).add(
+                                  UpdateCategoryEvent(newCatetoryEntity),
+                                );
+                              } else {
+                                BlocProvider.of<CategoryBloc>(context).add(
+                                  AddCategoryEvent(
+                                    CategoryEntity(
+                                      id: idGenerator(),
+                                      title: titleController.text,
+                                    ),
+                                  ),
+                                );
+                              }
                             }
                           },
                           child: const Text('Save'),

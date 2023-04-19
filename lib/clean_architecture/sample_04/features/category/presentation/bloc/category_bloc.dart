@@ -34,7 +34,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       emit(CategoryLoadingState());
       try {
         await addCategoryUseCase(event.categoryEntity);
-        add(GetAllCategoryEvent());
+        emit(CategoryAddedOrUpdatedState());
       } on DuplicateCategoryException catch (e) {
         emit(CategoryErrorState(e.message));
       }
