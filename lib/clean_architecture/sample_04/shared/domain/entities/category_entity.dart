@@ -15,4 +15,11 @@ class CategoryEntity {
       title: title,
     );
   }
+
+  CategoryEntity copyWith({String? newId, String? newTitle}) {
+    return CategoryEntity(
+      id: newId ?? id,
+      title: newTitle ?? title,
+    );
+  }
 }

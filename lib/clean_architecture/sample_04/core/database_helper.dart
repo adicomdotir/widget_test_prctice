@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/core/error/exception.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/shared/data/models/category_model.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/shared/data/models/expense_model.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/shared/data/models/report_model.dart';
@@ -67,8 +68,13 @@ class DatabaseHelper {
 
   Future<void> addCategory(CategoryModel categoryModel) async {
     await Hive.openBox('categories');
-    await Hive.box('categories')
-        .put(categoryModel.id, jsonEncode(categoryModel.toJson()));
+    final box = Hive.box('categories');
+    if (box.values
+        .map((e) => CategoryModel.fromJson(jsonDecode(e)))
+        .any((element) => element.title == categoryModel.title)) {
+      throw DuplicateCategoryException('Category already exist in DB!');
+    }
+    box.put(categoryModel.id, jsonEncode(categoryModel.toJson()));
   }
 
   Future<List<CategoryModel>> getAllCategories() async {
@@ -77,5 +83,21 @@ class DatabaseHelper {
     final categories =
         box.values.map((e) => CategoryModel.fromJson(jsonDecode(e))).toList();
     return categories;
+  }
+
+  Future<void> deleteCategory(CategoryModel categoryModel) async {
+    await Hive.openBox('categories');
+    await Hive.box('categories').delete(categoryModel.id);
+  }
+
+  Future<void> updateCategory(CategoryModel categoryModel) async {
+    await Hive.openBox('categories');
+    final box = Hive.box('categories');
+    if (box.values
+        .map((e) => CategoryModel.fromJson(jsonDecode(e)))
+        .any((element) => element.title == categoryModel.title)) {
+      throw DuplicateCategoryException('Category already exist in DB!');
+    }
+    box.put(categoryModel.id, jsonEncode(categoryModel.toJson()));
   }
 }

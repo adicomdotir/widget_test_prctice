@@ -6,10 +6,16 @@ class CategoryInitialState extends CategoryState {}
 
 class CategoryLoadingState extends CategoryState {}
 
-class CategoryErrorState extends CategoryState {}
+class CategoryErrorState extends CategoryState {
+  final String? message;
+
+  CategoryErrorState([this.message]);
+}
 
 class CategoryLoadedState extends CategoryState {
   final List<CategoryEntity> categories;
 
   CategoryLoadedState(this.categories);
 }
+
+class CategoryAddedOrUpdatedState extends CategoryState {}

@@ -14,8 +14,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
 
   @override
   Future<void> deleteCategory(CategoryModel categoryModel) {
-    // TODO: implement deleteCategory
-    throw UnimplementedError();
+    return dataSource.deleteCategory(categoryModel);
   }
 
   @override
@@ -31,7 +30,6 @@ class CategoryRepositoryImpl extends CategoryRepository {
 
   @override
   Future<void> updateCategory(CategoryModel categoryModel) {
-    // TODO: implement updateCategory
-    throw UnimplementedError();
+    return dataSource.updateCategory(categoryModel);
   }
 }

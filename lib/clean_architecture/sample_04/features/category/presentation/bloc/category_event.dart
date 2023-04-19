@@ -9,3 +9,15 @@ class AddCategoryEvent extends CategoryEvent {
 
   AddCategoryEvent(this.categoryEntity);
 }
+
+class DeleteCategoryEvent extends CategoryEvent {
+  final CategoryEntity categoryEntity;
+
+  DeleteCategoryEvent(this.categoryEntity);
+}
+
+class UpdateCategoryEvent extends CategoryEvent {
+  final CategoryEntity categoryEntity;
+
+  UpdateCategoryEvent(this.categoryEntity);
+}

@@ -4,7 +4,9 @@ import 'package:widget_test_practice/clean_architecture/sample_04/features/categ
 import 'package:widget_test_practice/clean_architecture/sample_04/features/category/data/repositories/category_repository_impl.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/repositories/category_repository.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/use_cases/add_category_use_case.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/use_cases/delete_category_use_case.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/use_cases/get_all_categories_use_case.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/use_cases/update_category_use_case.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/bloc/category_bloc.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/home/data/data_sources/expense_data_source.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/home/data/respsitories/expesne_repository_impl.dart';
@@ -34,6 +36,8 @@ Future<void> init() async {
     () => CategoryBloc(
       getAllCategoriesUseCase: inject(),
       addCategoryUseCase: inject(),
+      deleteCategoryUseCase: inject(),
+      updateCategoryUseCase: inject(),
     ),
   );
 
@@ -58,6 +62,12 @@ Future<void> init() async {
   );
   inject.registerLazySingleton(
     () => AddCategoryUseCase(repository: inject()),
+  );
+  inject.registerLazySingleton(
+    () => DeleteCategoryUseCase(repository: inject()),
+  );
+  inject.registerLazySingleton(
+    () => UpdateCategoryUseCase(repository: inject()),
   );
 
   /// repository

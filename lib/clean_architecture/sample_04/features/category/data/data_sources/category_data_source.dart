@@ -21,8 +21,7 @@ class CategoryDataSourceImpl extends CategoryDataSource {
 
   @override
   Future<void> deleteCategory(CategoryModel categoryModel) {
-    // TODO: implement deleteCategory
-    throw UnimplementedError();
+    return databaseHelper.deleteCategory(categoryModel);
   }
 
   @override
@@ -38,7 +37,6 @@ class CategoryDataSourceImpl extends CategoryDataSource {
 
   @override
   Future<void> updateCategory(CategoryModel categoryModel) {
-    // TODO: implement updateCategory
-    throw UnimplementedError();
+    return databaseHelper.updateCategory(categoryModel);
   }
 }

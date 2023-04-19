@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/core/utils/id_generator.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/bloc/category_event.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/bloc/category_state.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/screens/add_update_category_screen.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/main.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/shared/domain/entities/category_entity.dart';
 import '../bloc/category_bloc.dart';
@@ -50,7 +51,26 @@ class CategoryListScreen extends StatelessWidget {
                   }
                   return buildListView(categories);
                 } else if (state is CategoryErrorState) {
-                  return const Text('Error');
+                  return SizedBox(
+                    width: double.maxFinite,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(state.message ?? ''),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            BlocProvider.of<CategoryBloc>(context)
+                                .add(GetAllCategoryEvent());
+                          },
+                          child: const Text('Back'),
+                        ),
+                      ],
+                    ),
+                  );
                 } else {
                   return const Text('Unkwon');
                 }
@@ -68,7 +88,36 @@ class CategoryListScreen extends StatelessWidget {
       itemBuilder: (context, index) {
         final category = categories[index];
         return ListTile(
+          leading: IconButton(
+            icon: const Icon(
+              Icons.edit,
+              color: Colors.blueGrey,
+            ),
+            onPressed: () {
+              Navigator.of(context)
+                  .push(
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          AddUpdateCategoryScreen(categoryEntity: category),
+                    ),
+                  )
+                  .then(
+                    (value) => BlocProvider.of<CategoryBloc>(context)
+                        .add(GetAllCategoryEvent()),
+                  );
+            },
+          ),
           title: Text(category.title),
+          trailing: IconButton(
+            icon: const Icon(
+              Icons.delete,
+              color: Colors.red,
+            ),
+            onPressed: () {
+              BlocProvider.of<CategoryBloc>(context)
+                  .add(DeleteCategoryEvent(category));
+            },
+          ),
         );
       },
     );
