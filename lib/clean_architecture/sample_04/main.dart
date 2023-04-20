@@ -12,16 +12,3 @@ void main() async {
     ),
   );
 }
-
-List<String> categoriesMockData = [
-  'Food',
-  'Car',
-  'Home',
-  'Technonogy',
-  'Smoke',
-  'Sport',
-  'Entertainment',
-  'Work',
-  'Travel',
-  'Wife',
-];

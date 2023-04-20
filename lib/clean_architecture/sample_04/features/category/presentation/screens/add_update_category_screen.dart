@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/core/utils/id_generator.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/bloc/category_bloc.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/bloc/category_event.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/bloc/category_state.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/shared/domain/entities/category_entity.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/presentation/bloc/category_bloc.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/presentation/bloc/category_event.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/presentation/bloc/category_state.dart';
 import '../../../../injection_container.dart' as di;
 
 class AddUpdateCategoryScreen extends StatelessWidget {

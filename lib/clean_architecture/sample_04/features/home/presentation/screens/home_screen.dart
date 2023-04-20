@@ -1,15 +1,11 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/core/utils/date_format.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/core/utils/id_generator.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/screens/category_list_screen.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/home/presentation/bloc/expense_bloc.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/features/home/presentation/screens/add_update_expense_screen.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/report/presentation/screens/report_screen.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/injection_container.dart'
-    as di;
-import 'package:widget_test_practice/clean_architecture/sample_04/main.dart';
+import '../../../../injection_container.dart' as di;
 import 'package:widget_test_practice/clean_architecture/sample_04/shared/domain/entities/expense_entity.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -68,17 +64,17 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          final random = Random();
-                          String category = categoriesMockData[
-                              random.nextInt(categoriesMockData.length)];
-                          final expenseEntity = ExpenseEntity(
-                            id: idGenerator(),
-                            category: category,
-                            amount: random.nextInt(100) + 10,
-                            date: DateTime.now().millisecondsSinceEpoch,
-                          );
-                          BlocProvider.of<ExpenseBloc>(context)
-                              .add(AddExpenseEvent(expenseEntity));
+                          Navigator.of(context)
+                              .push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AddUpdateExpenseScreen(),
+                                ),
+                              )
+                              .then(
+                                (value) => BlocProvider.of<ExpenseBloc>(context)
+                                    .add(GetAllExpenseEvent()),
+                              );
                         },
                         child: const Text('Add Expense'),
                       ),
@@ -134,7 +130,7 @@ class HomeScreen extends StatelessWidget {
           subtitle: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Category: ${expense.category}'),
+              Text('Category: ${expense.categoryId}'),
               const SizedBox(
                 width: 16,
               ),

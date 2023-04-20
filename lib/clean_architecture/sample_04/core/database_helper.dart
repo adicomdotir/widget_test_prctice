@@ -46,11 +46,11 @@ class DatabaseHelper {
     final expenses =
         box.values.map((e) => ExpenseModel.fromJson(jsonDecode(e))).toList();
     final categories =
-        expenses.map((expenseModel) => expenseModel.category).toSet();
+        expenses.map((expenseModel) => expenseModel.categoryId).toSet();
     List<ReportModel> reports = [];
     for (var category in categories) {
       final expensesFilterByCategory =
-          expenses.where((expenseModel) => expenseModel.category == category);
+          expenses.where((expenseModel) => expenseModel.categoryId == category);
       final result = expensesFilterByCategory
           .map((expenseModel) => expenseModel.amount)
           .reduce((value, amount) => amount + value);

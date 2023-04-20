@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/core/error/exception.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/use_cases/add_category_use_case.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/use_cases/delete_category_use_case.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/use_cases/get_all_categories_use_case.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/use_cases/update_category_use_case.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/domain/use_cases/add_category_use_case.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/domain/use_cases/delete_category_use_case.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/domain/use_cases/get_all_categories_use_case.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/domain/use_cases/update_category_use_case.dart';
 
 import 'category_event.dart';
 import 'category_state.dart';

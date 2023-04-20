@@ -1,14 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/core/utils/id_generator.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/bloc/category_event.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/bloc/category_state.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/screens/add_update_category_screen.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/main.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/shared/domain/entities/category_entity.dart';
-import '../bloc/category_bloc.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/presentation/bloc/category_bloc.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/presentation/bloc/category_event.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/presentation/bloc/category_state.dart';
 import '../../../../injection_container.dart' as di;
 
 class CategoryListScreen extends StatelessWidget {

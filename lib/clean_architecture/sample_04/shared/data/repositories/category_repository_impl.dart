@@ -1,6 +1,6 @@
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/data/data_sources/category_data_source.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/repositories/category_repository.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/data/data_sources/category_data_source.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/shared/data/models/category_model.dart';
+import 'package:widget_test_practice/clean_architecture/sample_04/shared/domain/repositories/category_repository.dart';
 
 class CategoryRepositoryImpl extends CategoryRepository {
   final CategoryDataSource dataSource;

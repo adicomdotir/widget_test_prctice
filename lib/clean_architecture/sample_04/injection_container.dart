@@ -1,13 +1,5 @@
 import 'package:get_it/get_it.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/core/database_helper.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/data/data_sources/category_data_source.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/data/repositories/category_repository_impl.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/repositories/category_repository.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/use_cases/add_category_use_case.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/use_cases/delete_category_use_case.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/use_cases/get_all_categories_use_case.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/domain/use_cases/update_category_use_case.dart';
-import 'package:widget_test_practice/clean_architecture/sample_04/features/category/presentation/bloc/category_bloc.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/home/data/data_sources/expense_data_source.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/home/data/respsitories/expesne_repository_impl.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/home/domain/respsitories/expesne_repository.dart';
@@ -21,6 +13,15 @@ import 'package:widget_test_practice/clean_architecture/sample_04/features/repor
 import 'package:widget_test_practice/clean_architecture/sample_04/features/report/domain/repositories/report_repository.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/report/domain/use_cases/get_report_use_case.dart';
 import 'package:widget_test_practice/clean_architecture/sample_04/features/report/presentation/bloc/report_bloc.dart';
+
+import 'shared/data/data_sources/category_data_source.dart';
+import 'shared/data/repositories/category_repository_impl.dart';
+import 'shared/domain/repositories/category_repository.dart';
+import 'shared/domain/use_cases/add_category_use_case.dart';
+import 'shared/domain/use_cases/delete_category_use_case.dart';
+import 'shared/domain/use_cases/get_all_categories_use_case.dart';
+import 'shared/domain/use_cases/update_category_use_case.dart';
+import 'shared/presentation/bloc/category_bloc.dart';
 
 final inject = GetIt.instance;
 

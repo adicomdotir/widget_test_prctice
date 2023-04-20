@@ -94,3 +94,5 @@ class ExpenseStateLoaded extends ExpenseState {
 
   ExpenseStateLoaded({required this.expenses});
 }
+
+class ExpenseAddedOrUpdatedState extends ExpenseState {}
