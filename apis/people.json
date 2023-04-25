@@ -2,21 +2,25 @@
     {
         "id": 1,
         "name": "Ali",
-        "age": 56
+        "age": 56,
+        "bookmark": false
     },
     {
         "id": 2,
         "name": "Hassan",
-        "age": 52
+        "age": 52,
+        "bookmark": false
     },
     {
         "id": 3,
         "name": "Hussein",
-        "age": 48
+        "age": 48,
+        "bookmark": false
     },
     {
         "id": 4,
         "name": "Sajjad",
-        "age": 44
+        "age": 44,
+        "bookmark": false
     }
 ]
