@@ -1,63 +1,139 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 void main(List<String> args) {
-  var foo = const ['a']; // if you want add value to this list throw exception!
-  print(foo);
-  foo = [];
-  print(foo);
-
   runApp(
-    const MaterialApp(
+    MaterialApp(
       home: Scaffold(
-        body: NewWidget(),
+        appBar: AppBar(),
+        body: const MyApp(),
       ),
     ),
   );
 }
 
-class NewWidget extends StatefulWidget {
-  const NewWidget({
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Column(
+      children: [
+        const Expanded(child: Text('Other')),
+        Container(
+          height: size.height * 0.15,
+          color: Colors.purple.shade900,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ItemWidget(
+                width: size.width * 0.20,
+                left: false,
+                right: true,
+                isDone: true,
+              ),
+              ItemWidget(
+                width: size.width * 0.20,
+                left: true,
+                right: true,
+                isDone: true,
+              ),
+              ItemWidget(
+                width: size.width * 0.20,
+                left: true,
+                right: true,
+                isDone: true,
+              ),
+              ItemWidget(
+                width: size.width * 0.20,
+                left: true,
+                right: true,
+                isDone: false,
+              ),
+              ItemWidget(
+                width: size.width * 0.20,
+                left: true,
+                right: false,
+                isDone: false,
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class ItemWidget extends StatelessWidget {
+  final double width;
+  final bool left;
+  final bool right;
+  final bool isDone;
+  const ItemWidget({
     Key? key,
+    required this.width,
+    required this.left,
+    required this.right,
+    required this.isDone,
   }) : super(key: key);
 
   @override
-  State<NewWidget> createState() => _NewWidgetState();
-}
-
-class _NewWidgetState extends State<NewWidget> {
-  String message = '0';
-  @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width,
+      width: width,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ConstrainedBox(
-            constraints: const BoxConstraints(
-              maxWidth: 90,
-              minWidth: 45,
-              maxHeight: 90,
-            ),
-            child: Container(
-              color: Colors.blueAccent,
-              child: Text(message),
-            ),
-          ),
           SizedBox(
-            height: 64.0,
+            width: width,
+            height: 70,
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 32,
+                  left: left ? 0 : (width / 2),
+                  child: Container(
+                    width: (left && right) ? width : width / 2,
+                    height: 6,
+                    color: isDone ? Colors.green : Colors.grey,
+                  ),
+                ),
+                Positioned(
+                  left: width / 2 - 20,
+                  top: 15,
+                  child: CircleAvatar(
+                    backgroundColor: isDone ? Colors.green : Colors.grey,
+                    foregroundColor: Colors.white,
+                    child: const Icon(Icons.handyman_outlined),
+                  ),
+                ),
+                Positioned(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                    ),
+                    child: const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: Icon(
+                        Icons.done,
+                        size: 15,
+                      ),
+                    ),
+                  ),
+                  top: 5,
+                  right: width / 2 - 10 - 20,
+                )
+              ],
+            ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              final newNum = Random().nextInt(90) + 10;
-              message += ' $newNum';
-              setState(() {});
-            },
-            child: const Text('Add Random Number'),
-          ),
+          const Text(
+            'Awaiting Deposit',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white),
+          )
         ],
       ),
     );
