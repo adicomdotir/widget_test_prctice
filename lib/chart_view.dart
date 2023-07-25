@@ -88,6 +88,36 @@ class ChartPainter extends CustomPainter {
     //     .map((e) => e.y)
     //     .reduce((value, element) => value < element ? value : element);
 
+    for (var i = xMin!; i < xMax!.toInt(); i++) {
+      paint.color = Colors.grey.shade800;
+      canvas.drawLine(
+        Offset(
+          size.width / xMax! * i,
+          0,
+        ),
+        Offset(
+          size.width / xMax! * i,
+          size.height,
+        ),
+        paint,
+      );
+    }
+
+    for (var i = yMin!; i < yMax!.toInt(); i++) {
+      paint.color = Colors.grey.shade800;
+      canvas.drawLine(
+        Offset(
+          0,
+          size.height / yMax! * i,
+        ),
+        Offset(
+          size.width,
+          size.height / yMax! * i,
+        ),
+        paint,
+      );
+    }
+
     for (var j = 0; j < data.length; j++) {
       paint.color = colors[j];
       for (int i = 0; i < data[j].length - 1; i++) {
