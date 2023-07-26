@@ -41,6 +41,8 @@ class ChartView extends StatelessWidget {
                 Colors.greenAccent,
                 Colors.redAccent,
               ],
+              strokeWidth: 2,
+              radius: 10,
             ),
           ),
         ),
@@ -52,6 +54,8 @@ class ChartView extends StatelessWidget {
 class ChartPainter extends CustomPainter {
   final List<List<Point>> data;
   final List<Color> colors;
+  final double strokeWidth;
+  final double radius;
   double? xMax;
   double? xMin;
   double? yMax;
@@ -60,6 +64,8 @@ class ChartPainter extends CustomPainter {
   ChartPainter({
     required this.data,
     required this.colors,
+    this.strokeWidth = 1,
+    this.radius = 5,
     this.xMax = 10,
     this.yMax = 10,
     this.xMin = 0,
@@ -73,7 +79,7 @@ class ChartPainter extends CustomPainter {
 
     paint.strokeCap = StrokeCap.round;
     paint.strokeJoin = StrokeJoin.round;
-    paint.strokeWidth = 1;
+    paint.strokeWidth = strokeWidth;
 
     // xMax = data
     //     .map((e) => e.x)
@@ -135,6 +141,17 @@ class ChartPainter extends CustomPainter {
           paint,
         );
       }
+      for (int i = 0; i < data[j].length; i++) {
+        final p1 = data[j][i];
+        canvas.drawCircle(
+          Offset(
+            size.width / xMax! * p1.x,
+            size.height - size.height / yMax! * p1.y,
+          ),
+          radius,
+          paint,
+        );
+      }
     }
   }
 
@@ -164,6 +181,6 @@ List<Point> chartData2 = [
   Point(x: 1, y: 10),
   Point(x: 2, y: 3),
   Point(x: 5, y: 5),
-  Point(x: 7, y: 6),
-  Point(x: 9, y: 1),
+  Point(x: 7, y: 3),
+  Point(x: 9, y: 9),
 ];
