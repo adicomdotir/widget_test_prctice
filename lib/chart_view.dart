@@ -41,8 +41,8 @@ class ChartView extends StatelessWidget {
                 Colors.greenAccent,
                 Colors.redAccent,
               ],
-              strokeWidth: 2,
-              radius: 10,
+              strokeWidth: 1,
+              radius: 3,
             ),
           ),
         ),
@@ -107,6 +107,12 @@ class ChartPainter extends CustomPainter {
         ),
         paint,
       );
+      drawText(
+        i.toString(),
+        canvas,
+        size,
+        Offset(size.width / xMax! * i, size.height),
+      );
     }
 
     for (var i = yMin!; i < yMax!.toInt(); i++) {
@@ -121,6 +127,14 @@ class ChartPainter extends CustomPainter {
           size.height / yMax! * i,
         ),
         paint,
+      );
+
+      drawText(
+        (yMax! - i).toString(),
+        canvas,
+        size,
+        Offset(0, size.height / yMax! * i),
+        xLabel: false,
       );
     }
 
@@ -160,6 +174,38 @@ class ChartPainter extends CustomPainter {
 
   @override
   bool shouldRebuildSemantics(ChartPainter oldDelegate) => false;
+
+  drawText(
+    String text,
+    Canvas canvas,
+    Size size,
+    Offset offset, {
+    bool xLabel = true,
+  }) {
+    const fontSize = 12.0;
+    const letterSize = fontSize / 2 + 1;
+    const textStyle = TextStyle(
+      color: Colors.black,
+      fontSize: fontSize,
+    );
+    final textSpan = TextSpan(
+      text: text,
+      style: textStyle,
+    );
+    final textPainter = TextPainter(
+      text: textSpan,
+      textDirection: TextDirection.ltr,
+    );
+    textPainter.layout(
+      minWidth: 0,
+      maxWidth: size.width,
+    );
+    Offset newOffset = Offset(
+      offset.dx - textPainter.width / 2 - (xLabel ? 0 : letterSize),
+      offset.dy - textPainter.height / 2 + (xLabel ? letterSize : 0),
+    );
+    textPainter.paint(canvas, newOffset);
+  }
 }
 
 class Point {
