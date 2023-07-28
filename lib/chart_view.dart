@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -17,8 +18,32 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class ChartView extends StatelessWidget {
+class ChartView extends StatefulWidget {
   const ChartView({Key? key}) : super(key: key);
+
+  @override
+  State<ChartView> createState() => _ChartViewState();
+}
+
+class _ChartViewState extends State<ChartView> {
+  Timer? timer;
+  List<Point> chartData1 = [];
+
+  @override
+  void initState() {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      int y = Random().nextInt(10);
+      chartData1.add(Point(x: chartData1.length.toDouble(), y: y.toDouble()));
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,50 +106,59 @@ class ChartPainter extends CustomPainter {
     paint.strokeJoin = StrokeJoin.round;
     paint.strokeWidth = strokeWidth;
 
-    // xMax = data
-    //     .map((e) => e.x)
-    //     .reduce((value, element) => value > element ? value : element);
-    // yMax = data
-    //     .map((e) => e.y)
-    //     .reduce((value, element) => value > element ? value : element);
-    // xMin = data
-    //     .map((e) => e.x)
-    //     .reduce((value, element) => value < element ? value : element);
-    // yMin = data
-    //     .map((e) => e.y)
-    //     .reduce((value, element) => value < element ? value : element);
+    final mergedList = data
+        .map((e) => e.map((e) => e).toList())
+        .reduce((value, element) => [...value, ...element]);
+    xMax = mergedList
+        .map((e) => e.x)
+        .reduce((value, element) => value > element ? value : element);
+    yMax = mergedList
+        .map((e) => e.y)
+        .reduce((value, element) => value > element ? value : element);
+    xMin = mergedList
+        .map((e) => e.x)
+        .reduce((value, element) => value < element ? value : element);
+    yMin = mergedList
+        .map((e) => e.y)
+        .reduce((value, element) => value < element ? value : element);
+    xMax = xMax! + 1;
+    xMin = xMin! - 1;
+    yMax = yMax! + 1;
+    yMin = yMin! - 1;
+    final xSize = xMax! - xMin!;
+    final ySize = yMax! - yMin!;
 
-    for (var i = xMin!; i < xMax!.toInt(); i++) {
+    for (var i = 0, k = xMin!; i < xSize; i++, k++) {
       paint.color = Colors.grey.shade800;
       canvas.drawLine(
         Offset(
-          size.width / xMax! * i,
+          size.width / xSize * i,
           0,
         ),
         Offset(
-          size.width / xMax! * i,
+          size.width / xSize * i,
           size.height,
         ),
         paint,
       );
       drawText(
-        i.toString(),
+        k.toString(),
         canvas,
         size,
-        Offset(size.width / xMax! * i, size.height),
+        Offset(size.width / xSize * i, size.height),
       );
     }
 
-    for (var i = yMin!; i < yMax!.toInt(); i++) {
+    for (var i = 0; i < ySize; i++) {
       paint.color = Colors.grey.shade800;
       canvas.drawLine(
         Offset(
           0,
-          size.height / yMax! * i,
+          size.height / ySize * i,
         ),
         Offset(
           size.width,
-          size.height / yMax! * i,
+          size.height / ySize * i,
         ),
         paint,
       );
@@ -133,7 +167,7 @@ class ChartPainter extends CustomPainter {
         (yMax! - i).toString(),
         canvas,
         size,
-        Offset(0, size.height / yMax! * i),
+        Offset(0, size.height / ySize * i),
         xLabel: false,
       );
     }
@@ -145,12 +179,12 @@ class ChartPainter extends CustomPainter {
         final p2 = data[j][i + 1];
         canvas.drawLine(
           Offset(
-            size.width / xMax! * p1.x,
-            size.height - size.height / yMax! * p1.y,
+            size.width / xSize * (p1.x + xMin!.abs()),
+            size.height - size.height / ySize * (p1.y + yMin!.abs()),
           ),
           Offset(
-            size.width / xMax! * p2.x,
-            size.height - size.height / yMax! * p2.y,
+            size.width / xSize * (p2.x + xMin!.abs()),
+            size.height - size.height / ySize * (p2.y + yMin!.abs()),
           ),
           paint,
         );
@@ -159,8 +193,8 @@ class ChartPainter extends CustomPainter {
         final p1 = data[j][i];
         canvas.drawCircle(
           Offset(
-            size.width / xMax! * p1.x,
-            size.height - size.height / yMax! * p1.y,
+            size.width / xSize * (p1.x + xMin!.abs()),
+            size.height - size.height / ySize * (p1.y + yMin!.abs()),
           ),
           radius,
           paint,
@@ -170,7 +204,7 @@ class ChartPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(ChartPainter oldDelegate) => false;
+  bool shouldRepaint(ChartPainter oldDelegate) => true;
 
   @override
   bool shouldRebuildSemantics(ChartPainter oldDelegate) => false;
@@ -215,13 +249,13 @@ class Point {
   Point({required this.x, required this.y});
 }
 
-List<Point> chartData1 = [
-  Point(x: 1, y: 1),
-  Point(x: 2, y: 1),
-  Point(x: 3, y: 3),
-  Point(x: 4, y: 0),
-  Point(x: 7, y: 8),
-];
+// List<Point> chartData1 = [
+//   Point(x: -1, y: 1),
+//   Point(x: 2, y: 1),
+//   Point(x: 3, y: 3),
+//   Point(x: 4, y: 0),
+//   Point(x: 7, y: 8),
+// ];
 
 List<Point> chartData2 = [
   Point(x: 1, y: 10),
@@ -229,4 +263,7 @@ List<Point> chartData2 = [
   Point(x: 5, y: 5),
   Point(x: 7, y: 3),
   Point(x: 9, y: 9),
+  Point(x: 11, y: 11),
+  Point(x: 12, y: 5),
+  Point(x: 20, y: 11),
 ];
