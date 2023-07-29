@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:widget_test_practice/provider_sample/provider_17/app_provider.dart';
+import 'package:widget_test_practice/state/product_model.dart';
 
 class AppDataProvider extends InheritedWidget {
   AppDataProvider({
@@ -40,6 +41,15 @@ class AppData {
 }
 
 void main(List<String> args) {
+  const x = Product(name: 'name', quantity: 12);
+  const y = Product(name: '1', quantity: 18);
+
+  print(x.toJson());
+  print(y.toJson());
+  var z = x.copyWith(name: '2');
+  print(z.toJson());
+  print(z == x);
+
   runApp(AppDataProvider(child: const MyApp(), appData: AppData(count: 5)));
 }
 
