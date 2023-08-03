@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:widget_test_practice/clean_architecture/sample_07/domain/entities/weather_entitiy.dart';
 import 'package:widget_test_practice/clean_architecture/sample_07/domain/usecases/get_current_weather.dart';
 
-import 'helpers/test_helper.mocks.dart';
+import '../../helpers/test_helper.mocks.dart';
 
 void main() {
   late GetCurrentWeatherUseCase getCurrentWeatherUseCase;
