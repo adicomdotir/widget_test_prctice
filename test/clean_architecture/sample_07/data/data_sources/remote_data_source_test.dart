@@ -2,12 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:widget_test_practice/clean_architecture/sample_07/core/error/exception.dart';
 import 'package:widget_test_practice/clean_architecture/sample_07/core/constants/constants.dart';
-import 'package:widget_test_practice/clean_architecture/sample_07/data/models/data_sources/remote_data_source.dart';
 import 'package:http/http.dart' as http;
+import 'package:widget_test_practice/clean_architecture/sample_07/data/data_sources/remote_data_source.dart';
 import 'package:widget_test_practice/clean_architecture/sample_07/data/models/weather_model.dart';
 
-import '../../../helpers/json_reader.dart';
-import '../../../helpers/test_helper.mocks.dart';
+import '../../helpers/json_reader.dart';
+import '../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MockHttpClient mockHttpClient;
