@@ -58,7 +58,7 @@ void main() {
 
       // act
       final result =
-          await weatherRemoteDataSourceImpl.getCurrentWeather(testCityName);
+          weatherRemoteDataSourceImpl.getCurrentWeather(testCityName);
 
       // assert
       expect(result, throwsA(isA<ServerException>()));
