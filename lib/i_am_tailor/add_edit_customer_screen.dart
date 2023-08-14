@@ -48,6 +48,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
                 title: 'نام و نام خانوادگی',
                 suffixText: '',
                 value: '',
+                textInputType: TextInputType.text,
                 onChanged: (value) {
                   customerInfo.name = value;
                 },
@@ -57,6 +58,9 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               ),
               TextFieldWidget(
                 title: 'دور کمر',
+                onChanged: (value) {
+                  customerInfo.doorCamar = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
@@ -203,11 +207,13 @@ class TextFieldWidget extends StatelessWidget {
   final String suffixText;
   final String value;
   final void Function(String value)? onChanged;
+  final TextInputType textInputType;
 
   TextFieldWidget({
     Key? key,
     required this.title,
     this.onChanged,
+    this.textInputType = TextInputType.number,
     this.value = '0',
     this.suffixText = 'سانتی متر',
   }) : super(key: key);
@@ -238,7 +244,7 @@ class TextFieldWidget extends StatelessWidget {
           child: TextField(
             controller: _controller,
             textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
+            keyboardType: textInputType,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
             ),
