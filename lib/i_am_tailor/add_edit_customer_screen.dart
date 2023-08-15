@@ -67,132 +67,198 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               ),
               TextFieldWidget(
                 title: 'دور باسن',
+                onChanged: (value) {
+                  customerInfo.doorBasan = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'قد باسن',
+                onChanged: (value) {
+                  customerInfo.ghadBasan = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'قد دامن',
+                onChanged: (value) {
+                  customerInfo.ghadDaman = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'دور گردن',
+                onChanged: (value) {
+                  customerInfo.doorGardan = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'قد بالاتنه جلو',
+                onChanged: (value) {
+                  customerInfo.ghadBalaTane = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'قد بالاتنه پشت',
+                onChanged: (value) {
+                  customerInfo.ghadPayinTane = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'کارور جلو',
+                onChanged: (value) {
+                  customerInfo.karorJelo = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'کارور پشت',
+                onChanged: (value) {
+                  customerInfo.karorPosht = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'دور سینه',
+                onChanged: (value) {
+                  customerInfo.doorSine = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'فاصله سینه',
+                onChanged: (value) {
+                  customerInfo.faseleSine = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'قد سینه',
+                onChanged: (value) {
+                  customerInfo.ghadSine = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'قد سرشانه',
+                onChanged: (value) {
+                  customerInfo.ghadSarshane = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'قد استین',
+                onChanged: (value) {
+                  customerInfo.ghadAstin = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'دور باوز',
+                onChanged: (value) {
+                  customerInfo.doorBazo = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'دور مچ',
+                onChanged: (value) {
+                  customerInfo.doorMoch = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'دور مشت',
+                onChanged: (value) {
+                  customerInfo.doorMosht = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'قد ارنج',
+                onChanged: (value) {
+                  customerInfo.ghadArenj = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'قد سارافون',
+                onChanged: (value) {
+                  customerInfo.ghadSaraphone = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'قد پیراهن یا بلوز',
+                onChanged: (value) {
+                  customerInfo.ghadPirahan = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'دور ران',
+                onChanged: (value) {
+                  customerInfo.doorRan = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'قد شلوار',
+                onChanged: (value) {
+                  customerInfo.ghadShalvar = double.parse(value);
+                },
               ),
               const SizedBox(
                 height: 8,
               ),
               TextFieldWidget(
                 title: 'دمپا',
+                onChanged: (value) {
+                  customerInfo.dampa = double.parse(value);
+                },
               ),
             ],
           ),
