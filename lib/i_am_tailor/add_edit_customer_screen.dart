@@ -59,7 +59,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'دور کمر',
                 onChanged: (value) {
-                  customerInfo.doorCamar = double.parse(value);
+                  customerInfo.doorCamar = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -68,7 +68,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'دور باسن',
                 onChanged: (value) {
-                  customerInfo.doorBasan = double.parse(value);
+                  customerInfo.doorBasan = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -77,7 +77,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'قد باسن',
                 onChanged: (value) {
-                  customerInfo.ghadBasan = double.parse(value);
+                  customerInfo.ghadBasan = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -86,7 +86,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'قد دامن',
                 onChanged: (value) {
-                  customerInfo.ghadDaman = double.parse(value);
+                  customerInfo.ghadDaman = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -95,7 +95,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'دور گردن',
                 onChanged: (value) {
-                  customerInfo.doorGardan = double.parse(value);
+                  customerInfo.doorGardan = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -104,7 +104,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'قد بالاتنه جلو',
                 onChanged: (value) {
-                  customerInfo.ghadBalaTane = double.parse(value);
+                  customerInfo.ghadBalaTane = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -113,7 +113,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'قد بالاتنه پشت',
                 onChanged: (value) {
-                  customerInfo.ghadPayinTane = double.parse(value);
+                  customerInfo.ghadPayinTane = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -122,7 +122,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'کارور جلو',
                 onChanged: (value) {
-                  customerInfo.karorJelo = double.parse(value);
+                  customerInfo.karorJelo = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -131,7 +131,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'کارور پشت',
                 onChanged: (value) {
-                  customerInfo.karorPosht = double.parse(value);
+                  customerInfo.karorPosht = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -140,7 +140,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'دور سینه',
                 onChanged: (value) {
-                  customerInfo.doorSine = double.parse(value);
+                  customerInfo.doorSine = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -149,7 +149,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'فاصله سینه',
                 onChanged: (value) {
-                  customerInfo.faseleSine = double.parse(value);
+                  customerInfo.faseleSine = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -158,7 +158,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'قد سینه',
                 onChanged: (value) {
-                  customerInfo.ghadSine = double.parse(value);
+                  customerInfo.ghadSine = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -167,7 +167,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'قد سرشانه',
                 onChanged: (value) {
-                  customerInfo.ghadSarshane = double.parse(value);
+                  customerInfo.ghadSarshane = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -176,7 +176,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'قد استین',
                 onChanged: (value) {
-                  customerInfo.ghadAstin = double.parse(value);
+                  customerInfo.ghadAstin = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -185,7 +185,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'دور باوز',
                 onChanged: (value) {
-                  customerInfo.doorBazo = double.parse(value);
+                  customerInfo.doorBazo = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -194,7 +194,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'دور مچ',
                 onChanged: (value) {
-                  customerInfo.doorMoch = double.parse(value);
+                  customerInfo.doorMoch = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -203,7 +203,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'دور مشت',
                 onChanged: (value) {
-                  customerInfo.doorMosht = double.parse(value);
+                  customerInfo.doorMosht = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -212,7 +212,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'قد ارنج',
                 onChanged: (value) {
-                  customerInfo.ghadArenj = double.parse(value);
+                  customerInfo.ghadArenj = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -221,7 +221,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'قد سارافون',
                 onChanged: (value) {
-                  customerInfo.ghadSaraphone = double.parse(value);
+                  customerInfo.ghadSaraphone = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -230,7 +230,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'قد پیراهن یا بلوز',
                 onChanged: (value) {
-                  customerInfo.ghadPirahan = double.parse(value);
+                  customerInfo.ghadPirahan = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -239,7 +239,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'دور ران',
                 onChanged: (value) {
-                  customerInfo.doorRan = double.parse(value);
+                  customerInfo.doorRan = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -248,7 +248,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'قد شلوار',
                 onChanged: (value) {
-                  customerInfo.ghadShalvar = double.parse(value);
+                  customerInfo.ghadShalvar = double.tryParse(value) ?? 0;
                 },
               ),
               const SizedBox(
@@ -257,7 +257,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'دمپا',
                 onChanged: (value) {
-                  customerInfo.dampa = double.parse(value);
+                  customerInfo.dampa = double.tryParse(value) ?? 0;
                 },
               ),
             ],
@@ -299,7 +299,7 @@ class TextFieldWidget extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: const TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               color: Colors.black,
               fontWeight: FontWeight.w700,
             ),
@@ -312,6 +312,7 @@ class TextFieldWidget extends StatelessWidget {
             textAlign: TextAlign.center,
             keyboardType: textInputType,
             decoration: const InputDecoration(
+              contentPadding: EdgeInsets.all(0),
               border: OutlineInputBorder(),
             ),
             onChanged: onChanged,
@@ -322,6 +323,7 @@ class TextFieldWidget extends StatelessWidget {
           child: Text(
             suffixText,
             textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 12),
           ),
         ),
       ],

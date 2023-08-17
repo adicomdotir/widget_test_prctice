@@ -22,10 +22,13 @@ class CustomerDetailScreen extends StatelessWidget {
             SizedBox(
               width: double.maxFinite,
               child: Card(
-                child: Text(
-                  customerInfo.name ?? '',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 18),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Text(
+                    customerInfo.name ?? '',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 18),
+                  ),
                 ),
               ),
             ),
@@ -173,9 +176,12 @@ class AttributeCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Card(
-        child: Text(
-          joinString(title, value),
-          textAlign: TextAlign.center,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Text(
+            joinString(title, value),
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );
