@@ -1,11 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:widget_test_practice/i_am_tailor/add_edit_customer_screen.dart';
 import 'package:widget_test_practice/i_am_tailor/customer_detail_screen.dart';
 import 'package:widget_test_practice/i_am_tailor/customer_info.dart';
 import 'package:widget_test_practice/i_am_tailor/database.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter();
+  Hive.registerAdapter(CustomerInfoAdapter());
+  await Hive.openBox<CustomerInfo>('customers');
+
   runApp(const MyApp());
 }
 

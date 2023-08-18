@@ -4,7 +4,12 @@ import 'customer_info.dart';
 import 'database.dart';
 
 class AddEditCustomerScreen extends StatefulWidget {
-  const AddEditCustomerScreen({Key? key}) : super(key: key);
+  final String? customerId;
+
+  const AddEditCustomerScreen({
+    Key? key,
+    this.customerId,
+  }) : super(key: key);
 
   @override
   State<AddEditCustomerScreen> createState() => _AddEditCustomerScreenState();
@@ -20,7 +25,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
         title: const Text('افراد جدید'),
         actions: [
           IconButton(
-            onPressed: () {
+            onPressed: () async {
               if (customerInfo.name == null || customerInfo.name!.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
@@ -31,7 +36,9 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
                   ),
                 );
               } else {
-                MyDatabase.getInstance().addCustomer(customerInfo);
+                final uk = UniqueKey();
+                customerInfo.id = uk.hashCode.toString();
+                await MyDatabase.getInstance().addCustomer(customerInfo);
                 Navigator.pop(context);
               }
             },

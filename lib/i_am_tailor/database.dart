@@ -1,7 +1,8 @@
+import 'package:hive/hive.dart';
+
 import 'customer_info.dart';
 
 class MyDatabase {
-  final List<CustomerInfo> _customers = [CustomerInfo()..name = 'یاشار پناهی'];
   static MyDatabase? _instance;
 
   MyDatabase._();
@@ -11,9 +12,13 @@ class MyDatabase {
     return _instance!;
   }
 
-  List<CustomerInfo> fetchCustomers() => _customers;
+  List<CustomerInfo> fetchCustomers() {
+    final customersBox = Hive.box<CustomerInfo>('customers');
+    return customersBox.values.toList();
+  }
 
-  void addCustomer(CustomerInfo customerInfo) {
-    _customers.add(customerInfo);
+  Future<void> addCustomer(CustomerInfo customerInfo) {
+    final customersBox = Hive.box<CustomerInfo>('customers');
+    return customersBox.put(customerInfo.id, customerInfo);
   }
 }
