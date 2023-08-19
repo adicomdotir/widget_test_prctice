@@ -21,4 +21,9 @@ class MyDatabase {
     final customersBox = Hive.box<CustomerInfo>('customers');
     return customersBox.put(customerInfo.id, customerInfo);
   }
+
+  CustomerInfo? fetchCustomer(String customerId) {
+    final customersBox = Hive.box<CustomerInfo>('customers');
+    return customersBox.get(customerId);
+  }
 }

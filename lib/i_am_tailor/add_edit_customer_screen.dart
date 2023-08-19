@@ -16,7 +16,20 @@ class AddEditCustomerScreen extends StatefulWidget {
 }
 
 class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
-  final CustomerInfo customerInfo = CustomerInfo();
+  CustomerInfo customerInfo = CustomerInfo();
+
+  @override
+  void initState() {
+    if (widget.customerId != null) {
+      final res = MyDatabase.getInstance().fetchCustomer(widget.customerId!);
+      if (res != null) {
+        setState(() {
+          customerInfo = res;
+        });
+      }
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +67,7 @@ class _AddEditCustomerScreenState extends State<AddEditCustomerScreen> {
               TextFieldWidget(
                 title: 'نام و نام خانوادگی',
                 suffixText: '',
-                value: '',
+                value: customerInfo.name ?? '',
                 textInputType: TextInputType.text,
                 onChanged: (value) {
                   customerInfo.name = value;

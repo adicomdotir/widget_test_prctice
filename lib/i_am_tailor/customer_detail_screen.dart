@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:widget_test_practice/i_am_tailor/add_edit_customer_screen.dart';
 import 'package:widget_test_practice/i_am_tailor/customer_info.dart';
 
 class CustomerDetailScreen extends StatelessWidget {
@@ -13,6 +14,21 @@ class CustomerDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('مشخصات فرد'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddEditCustomerScreen(
+                    customerId: customerInfo.id,
+                  ),
+                ),
+              );
+            },
+            icon: const Icon(Icons.edit_attributes),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
