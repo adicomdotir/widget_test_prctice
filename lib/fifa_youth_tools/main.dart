@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:widget_test_practice/fifa_youth_tools/add_edit_player_screen.dart';
+import 'package:widget_test_practice/fifa_youth_tools/config/constants.dart';
+import 'package:widget_test_practice/fifa_youth_tools/fifa_database.dart';
+import 'package:widget_test_practice/fifa_youth_tools/player_model.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(PlayerModelAdapter());
+  await Hive.openBox<PlayerModel>(Constants.playerTableName);
+
   runApp(
     const MaterialApp(
       home: FifaYouthToolsHome(),
@@ -17,19 +25,27 @@ class FifaYouthToolsHome extends StatefulWidget {
 }
 
 class _FifaYouthToolsHomeState extends State<FifaYouthToolsHome> {
+  List<PlayerModel> players = [];
+
+  @override
+  void initState() {
+    super.initState();
+    players = FifaDatabase.getInstance().fetchPlayers();
+  }
+
   @override
   Widget build(BuildContext context) {
-    fakePlayers.sort(
+    players.sort(
       (b, a) =>
           (a.maxPotential + a.minPotential) ~/ 2 -
           (b.maxPotential + b.minPotential) ~/ 2,
     );
-    int topPlayerCount = fakePlayers.where(
+    int topPlayerCount = players.where(
       (player) {
         return (player.maxPotential + player.minPotential) ~/ 2 >= 90;
       },
     ).length;
-    int goodPlayerCount = fakePlayers.where(
+    int goodPlayerCount = players.where(
       (player) {
         int playerAveragePotential =
             (player.maxPotential + player.minPotential) ~/ 2;
@@ -82,8 +98,8 @@ class _FifaYouthToolsHomeState extends State<FifaYouthToolsHome> {
 
   List<Widget> getItems(int topPlayerCount, int goodPlayerCount) {
     List<Widget> items = [];
-    for (var index = 0; index < fakePlayers.length; index++) {
-      final player = fakePlayers[index];
+    for (var index = 0; index < players.length; index++) {
+      final player = players[index];
       final Color playerColor = getColor(player);
       const textStyle = TextStyle(color: Colors.black);
       if (index == 0) {
@@ -184,71 +200,3 @@ class HeaderWidget extends StatelessWidget {
     );
   }
 }
-
-class PlayerModel {
-  final String id;
-  final String position;
-  final String name;
-  final int minPotential;
-  final int maxPotential;
-  final bool sold;
-
-  const PlayerModel({
-    required this.id,
-    required this.position,
-    required this.name,
-    required this.minPotential,
-    required this.maxPotential,
-    this.sold = false,
-  });
-}
-
-List<PlayerModel> fakePlayers = [
-  const PlayerModel(
-    id: '1',
-    position: 'st',
-    name: 'firstName1',
-    minPotential: 70,
-    maxPotential: 90,
-    sold: true,
-  ),
-  const PlayerModel(
-    id: '2',
-    position: 'gk',
-    name: 'firstName2',
-    minPotential: 84,
-    maxPotential: 94,
-  ),
-  // PlayerModel(
-  //   id: '3',
-  //   position: PositionType.gk.name,
-  //   firstName: 'firstName3',
-  //   lastName: 'lastName3',
-  //   minPotential: 78,
-  //   maxPotential: 90,
-  // ),
-  // PlayerModel(
-  //   id: '4',
-  //   position: PositionType.gk.name,
-  //   firstName: 'firstName4',
-  //   lastName: 'lastName4',
-  //   minPotential: 84,
-  //   maxPotential: 90,
-  // ),
-  // PlayerModel(
-  //   id: '5',
-  //   position: PositionType.gk.name,
-  //   firstName: 'firstName5',
-  //   lastName: 'lastName5',
-  //   minPotential: 88,
-  //   maxPotential: 95,
-  // ),
-  // PlayerModel(
-  //   id: '6',
-  //   position: PositionType.gk.name,
-  //   firstName: 'firstName6',
-  //   lastName: 'lastName6',
-  //   minPotential: 90,
-  //   maxPotential: 94,
-  // ),
-];

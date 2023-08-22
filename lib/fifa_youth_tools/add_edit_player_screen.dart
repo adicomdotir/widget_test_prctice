@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:widget_test_practice/fifa_youth_tools/main.dart';
+import 'package:widget_test_practice/fifa_youth_tools/fifa_database.dart';
+import 'package:widget_test_practice/fifa_youth_tools/player_model.dart';
 
 class AddEditPlayerScreen extends StatefulWidget {
   const AddEditPlayerScreen({Key? key, this.player}) : super(key: key);
@@ -106,10 +107,7 @@ class _AddEditPlayerScreenState extends State<AddEditPlayerScreen> {
               onPressed: () {
                 if (validateInput()) {
                   int id = 0;
-                  if (fakePlayers.isNotEmpty) {
-                    id = int.tryParse(fakePlayers.last.id) ?? 0 + 1;
-                  }
-                  fakePlayers.add(
+                  FifaDatabase.getInstance().addPlayer(
                     PlayerModel(
                       id: id.toString(),
                       position: _positionCtrl.text,
