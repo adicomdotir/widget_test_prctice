@@ -13,22 +13,27 @@ class FifaDatabase {
   }
 
   List<PlayerModel> fetchPlayers() {
-    final customersBox = Hive.box<PlayerModel>(Constants.playerTableName);
-    return customersBox.values.toList();
+    final playersBox = Hive.box<PlayerModel>(Constants.playerTableName);
+    return playersBox.values.toList();
   }
 
   Future<void> addPlayer(PlayerModel playerModel) {
-    final customersBox = Hive.box<PlayerModel>(Constants.playerTableName);
-    if (playerModel.id == '0') {
-      int id = customersBox.values.length + 1;
-      final newPlayerModel = playerModel.copyWith(id: id.toString());
-      return customersBox.put(id, newPlayerModel);
+    final playersBox = Hive.box<PlayerModel>(Constants.playerTableName);
+    if (playerModel.id == 0) {
+      int id = playersBox.values.length + 1;
+      final newPlayerModel = playerModel.copyWith(id: id);
+      return playersBox.put(id, newPlayerModel);
     }
-    return customersBox.put(playerModel.id, playerModel);
+    return playersBox.put(playerModel.id, playerModel);
   }
 
-  PlayerModel? fetchPlayerWithId(String playerId) {
-    final customersBox = Hive.box<PlayerModel>(Constants.playerTableName);
-    return customersBox.get(playerId);
+  PlayerModel? fetchPlayerWithId(int playerId) {
+    final playersBox = Hive.box<PlayerModel>(Constants.playerTableName);
+    return playersBox.get(playerId);
+  }
+
+  void deletePlayer(int playerId) {
+    final playersBox = Hive.box<PlayerModel>(Constants.playerTableName);
+    playersBox.delete(playerId);
   }
 }

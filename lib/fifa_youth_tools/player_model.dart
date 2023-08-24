@@ -5,7 +5,7 @@ part 'player_model.g.dart';
 @HiveType(typeId: 0)
 class PlayerModel {
   @HiveField(0)
-  final String id;
+  final int id;
   @HiveField(1)
   final String position;
   @HiveField(2)
@@ -27,7 +27,7 @@ class PlayerModel {
   });
 
   PlayerModel copyWith({
-    String? id,
+    int? id,
     String? position,
     String? name,
     int? minPotential,
@@ -42,5 +42,10 @@ class PlayerModel {
       maxPotential: maxPotential ?? this.maxPotential,
       sold: sold ?? this.sold,
     );
+  }
+
+  @override
+  String toString() {
+    return '[id: $id, id: $name]';
   }
 }

@@ -38,6 +38,9 @@ class _AddEditPlayerScreenState extends State<AddEditPlayerScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            const SizedBox(
+              height: 8,
+            ),
             TextField(
               controller: _nameCtrl,
               decoration: const InputDecoration(
@@ -46,7 +49,7 @@ class _AddEditPlayerScreenState extends State<AddEditPlayerScreen> {
               ),
             ),
             const SizedBox(
-              height: 8,
+              height: 16,
             ),
             Row(
               children: [
@@ -81,7 +84,7 @@ class _AddEditPlayerScreenState extends State<AddEditPlayerScreen> {
               ],
             ),
             const SizedBox(
-              height: 8,
+              height: 16,
             ),
             TextField(
               controller: _minPotCtrl,
@@ -91,7 +94,7 @@ class _AddEditPlayerScreenState extends State<AddEditPlayerScreen> {
               ),
             ),
             const SizedBox(
-              height: 8,
+              height: 16,
             ),
             TextField(
               controller: _maxPotCtrl,
@@ -106,14 +109,14 @@ class _AddEditPlayerScreenState extends State<AddEditPlayerScreen> {
             ElevatedButton(
               onPressed: () {
                 if (validateInput()) {
-                  int id = 0;
                   FifaDatabase.getInstance().addPlayer(
                     PlayerModel(
-                      id: id.toString(),
+                      id: widget.player?.id ?? 0,
                       position: _positionCtrl.text,
                       name: _nameCtrl.text,
                       minPotential: int.tryParse(_minPotCtrl.text) ?? 0,
                       maxPotential: int.tryParse(_maxPotCtrl.text) ?? 0,
+                      sold: sold,
                     ),
                   );
                   Navigator.pop(context);

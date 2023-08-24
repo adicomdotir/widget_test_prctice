@@ -30,7 +30,12 @@ class _FifaYouthToolsHomeState extends State<FifaYouthToolsHome> {
   @override
   void initState() {
     super.initState();
+    fetchPlayers();
+  }
+
+  void fetchPlayers() {
     players = FifaDatabase.getInstance().fetchPlayers();
+    setState(() {});
   }
 
   @override
@@ -64,7 +69,7 @@ class _FifaYouthToolsHomeState extends State<FifaYouthToolsHome> {
                   builder: (_) => const AddEditPlayerScreen(),
                 ),
               ).then((value) {
-                setState(() {});
+                fetchPlayers();
               });
             },
             icon: const Icon(Icons.add),
@@ -121,52 +126,85 @@ class _FifaYouthToolsHomeState extends State<FifaYouthToolsHome> {
         );
         items.add(header);
       }
-      Widget card = GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => AddEditPlayerScreen(player: player),
-            ),
-          );
-        },
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (player.sold)
-                  const Text(
-                    'SOLD',
-                    style: TextStyle(
-                      color: Colors.redAccent,
+      Widget card = Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => AddEditPlayerScreen(player: player),
                     ),
+                  ).then((value) => fetchPlayers());
+                },
+                child: Container(
+                  width: 30,
+                  height: 30,
+                  decoration: const BoxDecoration(
+                    color: Colors.green,
+                    shape: BoxShape.circle,
                   ),
-                Text(
-                  '${player.position.toUpperCase()} => ${player.name}',
-                  style: textStyle,
+                  child: const Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                    size: 20,
+                  ),
                 ),
-                Row(
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'POTENTIAL => ',
+                    if (player.sold)
+                      const Text(
+                        '*** SOLD ***',
+                        style: TextStyle(
+                          color: Colors.redAccent,
+                        ),
+                      ),
+                    Text(
+                      '${player.position.toUpperCase()} => ${player.name}',
                       style: textStyle,
                     ),
-                    Container(
-                      color: playerColor,
-                      child: Text(
-                        '[${player.minPotential} - ${player.maxPotential}]',
-                        style: textStyle,
-                      ),
-                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'POTENTIAL => ',
+                          style: textStyle,
+                        ),
+                        Container(
+                          color: playerColor,
+                          child: Text(
+                            '[${player.minPotential} - ${player.maxPotential}]',
+                            style: textStyle,
+                          ),
+                        ),
+                      ],
+                    )
                   ],
-                )
-              ],
-            ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () async {
+                  final result = await showAlertDialog(context);
+                  if (result) {
+                    FifaDatabase.getInstance().deletePlayer(player.id);
+                    fetchPlayers();
+                  }
+                },
+                child: const Icon(
+                  Icons.delete,
+                  color: Colors.redAccent,
+                ),
+              ),
+            ],
           ),
         ),
       );
@@ -199,4 +237,39 @@ class HeaderWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<dynamic> showAlertDialog(BuildContext context) {
+  // set up the buttons
+  Widget cancelButton = ElevatedButton(
+    child: const Text('No'),
+    onPressed: () {
+      Navigator.pop(context, false);
+    },
+  );
+  Widget continueButton = ElevatedButton(
+    child: const Text('Yes'),
+    onPressed: () {
+      Navigator.pop(context, true);
+    },
+  );
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: const Text('Delete Player'),
+    content: const Text(
+      'Would you like to delete player?',
+    ),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+  // show the dialog
+  return showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

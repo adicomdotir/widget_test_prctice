@@ -17,7 +17,7 @@ class PlayerModelAdapter extends TypeAdapter<PlayerModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return PlayerModel(
-      id: fields[0] as String,
+      id: fields[0] as int,
       position: fields[1] as String,
       name: fields[2] as String,
       minPotential: fields[3] as int,
