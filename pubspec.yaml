@@ -59,6 +59,8 @@ dependencies:
   freezed: ^0.14.5
   freezed_annotation: ^0.14.3
   json_annotation: ^4.1.0
+  flutter_shimmer: ^2.1.2
+  sqflite: ^2.0.2
 
 dev_dependencies:
   flutter_test:
