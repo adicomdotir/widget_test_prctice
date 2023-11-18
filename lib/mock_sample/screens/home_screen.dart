@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:odinote/constants.dart';
-import 'package:odinote/cubit/home_cubit/home_cubit.dart';
-import 'package:odinote/custom_widgets/list_card.dart';
-import 'package:odinote/screens/edit_screen.dart';
-import 'package:odinote/service/app_service.dart';
+import 'package:widget_test_practice/mock_sample/cubit/home_cubit/home_cubit.dart';
+import 'package:widget_test_practice/mock_sample/custom_widgets%20/list_card.dart';
+import 'package:widget_test_practice/mock_sample/service/app_service.dart';
+
+import '../constants.dart';
+import 'edit_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
