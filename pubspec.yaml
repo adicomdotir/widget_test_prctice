@@ -61,6 +61,7 @@ dependencies:
   json_annotation: ^4.1.0
   flutter_shimmer: ^2.1.2
   sqflite: ^2.0.2
+  dio_cache_interceptor: ^3.4.0
 
 dev_dependencies:
   flutter_test:
