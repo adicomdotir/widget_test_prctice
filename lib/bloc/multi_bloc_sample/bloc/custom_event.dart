@@ -16,3 +16,7 @@ class CustomEvent2 extends CustomEvent {
 class ResetEvent extends CustomEvent {
   ResetEvent() : super(count: 0);
 }
+
+class CheckEvent extends CustomEvent {
+  CheckEvent(int i) : super(count: i);
+}

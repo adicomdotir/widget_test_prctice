@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:widget_test_practice/bloc/multi_bloc_sample/bloc/CountStatus.dart';
+import 'package:widget_test_practice/bloc/multi_bloc_sample/bloc/message_status.dart';
 
 part 'custom_event.dart';
 part 'custom_state.dart';
@@ -10,6 +11,7 @@ class CustomBloc extends Bloc<CustomEvent, CustomState> {
           CustomState(
             countStatus1: CountStatusCompleted(0),
             countStatus2: CountStatusCompleted(0),
+            messageStatus: MessageStatus("It's normal"),
           ),
         ) {
     on<CustomEvent1>((event, emit) {
@@ -18,6 +20,7 @@ class CustomBloc extends Bloc<CustomEvent, CustomState> {
           newCountStatus1: CountStatusCompleted(event.count + 1),
         ),
       );
+      add(CheckEvent(event.count + 1));
     });
 
     on<CustomEvent2>((event, emit) {
@@ -42,6 +45,22 @@ class CustomBloc extends Bloc<CustomEvent, CustomState> {
           newCountStatus2: CountStatusCompleted(event.count),
         ),
       );
+    });
+
+    on<CheckEvent>((event, emit) {
+      if (event.count > 10 && event.count < 20) {
+        emit(
+          state.copyWith(
+            messageStatus: MessageStatus('Number is big'),
+          ),
+        );
+      } else if (event.count >= 20) {
+        emit(
+          state.copyWith(
+            messageStatus: MessageStatus('Number is very big'),
+          ),
+        );
+      }
     });
   }
 }

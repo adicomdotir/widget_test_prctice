@@ -83,7 +83,15 @@ class MyScreen extends StatelessWidget {
             ),
           ),
         ),
-        const Expanded(child: Center(child: Text('3'))),
+        Expanded(
+          child: Center(
+            child: BlocBuilder<CustomBloc, CustomState>(
+              builder: (context, state) {
+                return Text(state.messageStatus.message);
+              },
+            ),
+          ),
+        ),
         const Expanded(child: Center(child: Text('4'))),
       ],
     );
