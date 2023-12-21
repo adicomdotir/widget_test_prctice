@@ -28,12 +28,15 @@ class MyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(runtimeType);
+
     return Column(
       children: [
         Expanded(
           child: Center(
             child: BlocBuilder<CustomBloc, CustomState>(
               builder: (context, state) {
+                print(state.runtimeType);
                 if (state.countStatus1 is CountStatusCompleted) {
                   final castState = state.countStatus1 as CountStatusCompleted;
                   return GestureDetector(
@@ -92,8 +95,74 @@ class MyScreen extends StatelessWidget {
             ),
           ),
         ),
-        const Expanded(child: Center(child: Text('4'))),
+        Expanded(
+          child: Center(
+            child: UpdateCounterState(
+              child: Builder(
+                builder: (context) {
+                  final counter = CounterInheritedWidget.of(context)?.counter;
+
+                  return GestureDetector(
+                    onTap: () {
+                      CounterInheritedWidget.of(context)?.increament();
+                    },
+                    child: Text(counter.toString()),
+                  );
+                },
+              ),
+            ),
+          ),
+        ),
       ],
+    );
+  }
+}
+
+class CounterInheritedWidget extends InheritedWidget {
+  final int counter;
+  final _UpdateCounterState updateCounterState;
+
+  const CounterInheritedWidget({
+    Key? key,
+    required Widget child,
+    required this.counter,
+    required this.updateCounterState,
+  }) : super(key: key, child: child);
+
+  static _UpdateCounterState? of(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<CounterInheritedWidget>()
+        ?.updateCounterState;
+  }
+
+  @override
+  bool updateShouldNotify(CounterInheritedWidget oldWidget) =>
+      oldWidget.counter != counter;
+}
+
+class UpdateCounterState extends StatefulWidget {
+  final Widget child;
+  const UpdateCounterState({required this.child, Key? key}) : super(key: key);
+
+  @override
+  State<UpdateCounterState> createState() => _UpdateCounterState();
+}
+
+class _UpdateCounterState extends State<UpdateCounterState> {
+  int counter = 0;
+
+  void increament() {
+    setState(() {
+      counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CounterInheritedWidget(
+      counter: counter,
+      updateCounterState: this,
+      child: widget.child,
     );
   }
 }

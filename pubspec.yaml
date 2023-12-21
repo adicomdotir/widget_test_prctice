@@ -62,6 +62,12 @@ dependencies:
   flutter_shimmer: ^2.1.2
   sqflite: ^2.0.2
   dio_cache_interceptor: ^3.4.0
+  todos_api:
+    path: packages/todos_api
+  local_storage_todos_api:
+    path: packages/local_storage_todos_api
+  todos_repository:
+    path: packages/todos_repository
 
 dev_dependencies:
   flutter_test:
