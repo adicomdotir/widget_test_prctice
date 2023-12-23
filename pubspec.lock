@@ -588,6 +588,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  open_meteo_api:
+    dependency: transitive
+    description:
+      path: "packages/open_meteo_api"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   package_config:
     dependency: transitive
     description:
@@ -1027,6 +1034,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  weather_repository:
+    dependency: "direct main"
+    description:
+      path: "packages/weather_repository"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   web_socket_channel:
     dependency: transitive
     description:

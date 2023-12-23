@@ -68,6 +68,8 @@ dependencies:
     path: packages/local_storage_todos_api
   todos_repository:
     path: packages/todos_repository
+  weather_repository:
+    path: packages/weather_repository
 
 dev_dependencies:
   flutter_test:
