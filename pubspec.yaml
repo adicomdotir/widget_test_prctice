@@ -62,6 +62,7 @@ dependencies:
   flutter_shimmer: ^2.1.2
   sqflite: ^2.0.2
   dio_cache_interceptor: ^3.4.0
+  formz: ^0.4.1
   todos_api:
     path: packages/todos_api
   local_storage_todos_api:
@@ -70,6 +71,10 @@ dependencies:
     path: packages/todos_repository
   weather_repository:
     path: packages/weather_repository
+  authentication_repository:
+    path: packages/authentication_repository
+  user_repository:
+    path: packages/user_repository
 
 dev_dependencies:
   flutter_test:
