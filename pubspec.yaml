@@ -63,6 +63,7 @@ dependencies:
   sqflite: ^2.0.2
   dio_cache_interceptor: ^3.4.0
   formz: ^0.4.1
+  logger: 1.4.0
   todos_api:
     path: packages/todos_api
   local_storage_todos_api:
